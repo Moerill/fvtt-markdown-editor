@@ -2,7 +2,7 @@
 	"name": "markdown-editor",
 	"title": "Markdown editor",
 	"description": "This module is a mix of QoL changes, enhancements for my game and stuff i play around with. For a complete feature list check the URL down below.",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"minimumCoreVersion": "0.6.0",
 	"compatibleCoreVersion": "0.6.5",
 	"author": "Moerill",
@@ -11,7 +11,7 @@
 	"styles": [
 		"css/markdown-editor.css"
 	],
-	"manifest": "https://raw.githubusercontent.com/Moerill/mess/master/src/module.json",
-	"url": "https://github.com/Moerill/mess",
-	"download": "https://github.com/Moerill/mess/releases/download/v0.0.3/markdown-editor.zip"
+	"manifest": "https://raw.githubusercontent.com/Moerill/fvtt-markdown-editor/master/src/module.json",
+	"url": "https://github.com/Moerill/fvtt-markdown-editor",
+	"download": "https://github.com/Moerill/fvtt-markdown-editor/releases/download/v0.0.4/markdown-editor.zip"
 }
