@@ -1,0 +1,108 @@
+
+@import (inline) "easymde.min.css";
+@import (inline) "show-hint.css";
+
+.cm-s-easymde {
+	color: inherit;
+	
+	background: url(../../../ui/parchment.jpg) repeat;
+}
+
+.cm-s-easymde, .editor-preview-active, .editor-preview-side, .editor-toolbar.fullscreen {
+	background: url(../../../ui/parchment.jpg) repeat;
+	color: inherit;
+}
+
+
+.dark-mode {
+	.cm-s-easymde, .editor-preview-active, .editor-preview-side, .editor-toolbar.fullscreen {
+		background: url(../../dnd5e-dark-mode/ui/parchment_dark.jpg) repeat;
+	}
+
+	.editor-toolbar {
+		.active {
+			color: #3f88e6;
+			background: none;
+		}
+
+		i.separator {
+			border-left: 1px solid #ccca;
+		}
+
+		border: 1px solid #ccc3;
+	}
+	.CodeMirror .CodeMirror-cursor{
+		border-left: 1px solid #ccc;
+	}
+}
+
+
+.editor-preview-side, .editor-toolbar.fullscreen {
+	border: none;
+	border-left: 2px groove #ccc9;
+}
+
+.editor-toolbar {
+	& i.separator {
+		border-left: 1px solid #666a;
+		// border-right: 1px solid #9998;
+		border-right: none;
+	}
+
+	border: 1px solid #6666;
+
+	&:before, &:after {
+		margin: 1px;
+	}
+	
+	&.fullscreen {
+		filter: brightness(0.8);
+		box-shadow: 0 0 10px inset rgba(0,0,0, 0.5);
+
+		&:before, &:after {
+			display: none;
+		}
+	}
+}
+
+.editor {
+	.editor-toolbar ~ .cm-s-easymde {
+		height: calc(100% - 38px);
+	}
+	.editor-toolbar.hidden ~ .cm-s-easymde {
+		height: 100%;
+	}
+	.editor-toolbar.hidden {
+		display: none;
+	}
+}
+.cm-s-easymde {
+	border: none;
+	height: 100%;
+}
+
+// .journal-sheet form .cm-s-easymde {
+// 	height: calc(100% - 31px);
+// }
+
+.editor-preview pre {
+	background: #eeea;
+	padding: 0.3em;
+}
+
+.dark-mode {
+	.editor-preview {
+		pre {
+			background: #3338;
+		}
+	}
+}
+
+.EasyMDEContainer {
+	height: 100%;
+}
+
+// experimental
+.cm-fat-cursor .CodeMirror-cursor {
+	width: 1ch;
+}

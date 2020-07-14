@@ -1,0 +1,38 @@
+<div class='mess-attack-card chat-card' data-user-id="{{user}}" data-scene-id='{{sceneId}}' data-target-id='{{target._id}}' data-actor-id={{actor.id}} data-item-id={{item.id}}>
+	<span class='mess-attack-flavor'>{{item.name}}{{#if flavor}} - {{flavor}}{{/if}}</span>
+	{{#unless allowed}}
+	<span class='mess-chat-error'>
+		{{localize 'MESS.attackCard.chatCardResourceError'}}
+	</span>
+	{{/unless}}
+	{{#if target.img}}
+	<div class='mess-chat-target'>
+		<img src="{{target.img}}" title='{{localize 'MESS.attackCard.cardTargetTooltip'}}'>
+		<div class='mess-target-overlay'>
+			<div class='mess-target-overlay-container'>
+				<span class='mess-target-name'>{{!--localize 'MESS.attackCard.target'}}: <br>--}}{{target.name}}</span>
+				<div class='mess-gm-info'>
+					<span><i class="fas fa-shield-alt"></i> {{targetActor.data.attributes.ac.value}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{/if}}
+	<div class='mess-chat-rolls {{#if isGM}}mess-gm-rolls{{/if}}'>
+		{{#if toHit}}
+		<div class='mess-chat-to-hit'>
+			<label class='mess-chat-roll-type'>{{localize 'MESS.attackCard.toHit'}}</label><a class='mess-show-btn' title="{{localize 'MESS.attackCard.showToPlayers'}}"><i class="fas"></i></a>
+			<button class='mess-button-to-hit {{#if isGM}}mess-gm-dice{{/if}}' title="{{toHit.terms}} = {{toHit.formula}} = {{toHit.totalModifier}}"><i class="fas fa-dice-d20"></i>{{toHit.totalModifier}}</button>
+		</div>
+		{{/if}}
+		{{#if dmgs}}
+		<div class='mess-chat-dmg'>
+			<label class='mess-chat-roll-type'>{{localize 'MESS.attackCard.damage'}}</label><a class='mess-show-btn' title="{{localize 'MESS.attackCard.showToPlayers'}}"><i class="fas"></i></a>
+			{{#each dmgs.parts}}
+				<button class='mess-button-dmg' title="{{this.[0]}} = {{this.[2]}}" data-terms="{{this.[0]}}" data-formula="{{this.[2]}}" data-dmg-type="{{this.[1]}}"><i class="fas fa-dice"></i> {{this.[2]}}</button>
+				<label class='mess-chat-sub-label'>{{this.[1]}}</label>
+			{{/each}}
+		</div>
+		{{/if}}
+	</div>
+</div>

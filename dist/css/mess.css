@@ -1,0 +1,480 @@
+.dark-mode #chat {
+  --highlight-color: #3a80e1;
+}
+.dark-mode .mess-attack-card {
+  --border-color: #444;
+  --border-button: #444;
+  --font-sub-color: #9c9c9c;
+  --color-success: #26a30a;
+  --color-fail: #c40502;
+  --font-color: #ccc;
+}
+#chat {
+  --highlight-color: red;
+}
+.mess-attack-card {
+  --border-color: #FFF;
+  --border-button: #999;
+  --font-sub-color: #33322e;
+  --color-success: #26a30a;
+  --color-fail: #c40502;
+  --font-color: #191813;
+}
+#chat-controls .mess-roll-control {
+  height: 1.8em;
+  flex: 1 100%;
+  display: flex;
+  margin: 0.2em 0 0.15em 0;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+#chat-controls .mess-roll-control div {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+#chat-controls .mess-roll-control .mess-adv-selector {
+  --color-good: #35e935;
+  --color-bad: red;
+  flex: 0 50%;
+}
+#chat-controls .mess-roll-control .mess-adv-selector a {
+  display: none;
+  min-width: 30px;
+  justify-content: center;
+  flex-flow: row nowrap;
+  align-items: center;
+  opacity: 1;
+}
+#chat-controls .mess-roll-control .mess-adv-selector a i {
+  font-size: 1.2em;
+  transform: rotate(-25deg);
+}
+#chat-controls .mess-roll-control .mess-adv-selector a.mess-selected {
+  display: flex;
+}
+#chat-controls .mess-roll-control .mess-adv-selector .mess-adv-btn i:nth-child(1) {
+  color: var(--color-good);
+  font-size: 1.2em;
+  transform: rotate(45deg);
+  z-index: 1;
+  position: relative;
+  left: 0.1em;
+}
+#chat-controls .mess-roll-control .mess-adv-selector .mess-adv-btn i:nth-child(2) {
+  position: relative;
+  left: -0.1em;
+  font-size: 1em;
+  filter: brightness(0.5);
+  transform: rotate(30deg);
+  z-index: 0;
+}
+#chat-controls .mess-roll-control .mess-adv-selector .mess-dis-btn i:nth-child(1) {
+  font-size: 1em;
+  filter: brightness(0.5);
+  transform: rotate(45deg);
+  z-index: 0;
+  position: relative;
+  left: 0.1em;
+}
+#chat-controls .mess-roll-control .mess-adv-selector .mess-dis-btn i:nth-child(2) {
+  color: var(--color-bad);
+  font-size: 1.2em;
+  transform: rotate(30deg);
+  z-index: 1;
+  position: relative;
+  left: -0.1em;
+}
+#chat-controls .mess-roll-control .mess-adv-selector #mess-roll-mod {
+  color: #ccc;
+  margin: 0 0.5em;
+}
+#chat-controls .mess-roll-control .mess-adv-selector #mess-roll-mod::placeholder {
+  color: #ccca;
+}
+#chat-controls .mess-roll-control .mess-autoroll-selector a {
+  opacity: 0.5;
+  border: 1px solid;
+  border-radius: 3px;
+}
+#chat-controls .mess-roll-control .mess-autoroll-selector a.mess-selected {
+  opacity: 1;
+  border-color: var(--highlight-color);
+}
+#chat-controls .mess-roll-control a {
+  padding: 0 3px;
+  margin: 3px;
+}
+.mess button[data-action="attack"] ~ button[data-action="damage"],
+.mess button[data-action="versatile"] {
+  display: none;
+}
+.mess .mess-attack-card {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.mess .mess-attack-card #context-menu {
+  max-width: 150px;
+  width: 150px;
+  min-width: 150px;
+  text-align: left;
+  left: calc(50% - 75px);
+}
+.mess .mess-attack-card #context-menu .mess-context-menu-header {
+  padding: 0.3em;
+  background: #aaa3;
+  cursor: initial;
+}
+.mess .mess-attack-card #context-menu .mess-context-menu-header i {
+  padding: 0 3px 0 0;
+  width: 1.3ch;
+}
+.mess .mess-attack-card #context-menu .context-item {
+  line-height: 1.5em;
+  padding: 0 1.5ch;
+  display: flex;
+  flex-flow: row-reverse nowrap;
+}
+.mess .mess-attack-card #context-menu .context-item span {
+  text-align: right;
+  flex: 1;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+.mess .mess-attack-card #context-menu .context-item label {
+  cursor: pointer;
+  flex: 0;
+  color: #aaa;
+}
+.mess .mess-attack-card .mess-dice-result {
+  height: auto;
+}
+.mess .mess-attack-card .mess-dice-result .mess-roll-container {
+  font-weight: bold;
+  font-size: 1.4em;
+  height: 0.8em;
+}
+.mess .mess-attack-card .mess-dice-result .mess-roll-container .mess-roll-total {
+  font-size: inherit;
+}
+.mess .mess-attack-card .mess-dice-result .crit {
+  color: var(--color-success);
+}
+.mess .mess-attack-card .mess-dice-result .fumble {
+  color: var(--color-fail);
+}
+.mess .mess-attack-card .mess-dice-result #context-menu {
+  min-width: unset;
+}
+.mess .mess-button-to-hit,
+.mess .mess-button-dmg,
+.mess .mess-dice-result {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-button);
+  box-shadow: 0 0 2px #FFF inset;
+  height: 1.5em;
+  line-height: 1.2em;
+  width: 70%;
+  border-radius: 0.3em;
+}
+.mess .mess-hit,
+.mess .mess-miss {
+  position: relative;
+}
+.mess .mess-hit:after,
+.mess .mess-miss:after {
+  background-color: var(--font-color);
+  width: 1.2em;
+  height: 1.2em;
+  position: absolute;
+  right: 0;
+  content: '';
+  display: inline-block;
+  filter: saturate(80%);
+}
+.mess .mess-hit.crit:after,
+.mess .mess-miss.crit:after {
+  background-color: var(--color-success);
+}
+.mess .mess-hit.fumble:after,
+.mess .mess-miss.fumble:after {
+  background-color: var(--color-fail);
+}
+.mess .mess-attack-card .dice-roll {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-button);
+  box-shadow: 0 0 2px #FFF inset;
+  height: auto;
+  line-height: 1.2em;
+  width: 70%;
+}
+.mess .mess-hit:after {
+  mask: url(../assets/shield-impact.svg) no-repeat 50% 50%;
+  -webkit-mask: url(../assets/shield-impact.svg) no-repeat 50% 50%;
+  bottom: 0px;
+}
+.mess .mess-miss:after {
+  mask: url(../assets/shield-reflect.svg) no-repeat 50% 50%;
+  -webkit-mask: url(../assets/shield-reflect.svg) no-repeat 50% 50%;
+  transform: scale(-1, 1);
+  bottom: -3px;
+}
+.mess .mess-attack-flavor {
+  flex: 1 100%;
+  border-top: 2px groove var(--border-color);
+  border-bottom: 2px groove var(--border-color);
+  padding: 0.2em 0;
+}
+.mess .mess-chat-error {
+  flex: 1 100%;
+  border-bottom: 2px groove var(--border-color);
+  padding: 0.2em 0;
+  color: var(--color-fail);
+}
+.mess .mess-chat-target {
+  flex: 40%;
+  border-right: 2px groove var(--border-color);
+  display: block;
+}
+.mess .mess-chat-target .mess-target-name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mess .mess-chat-target img {
+  z-index: 1;
+  border: none;
+  cursor: pointer;
+  height: 75px;
+  display: block;
+  margin: 0 auto;
+}
+.mess .mess-chat-target img:hover {
+  border: 1px solid var(--highlight-color);
+}
+.mess .mess-target-overlay {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-end;
+}
+.mess .mess-target-overlay .mess-target-overlay-container {
+  width: fit-content;
+  display: flex;
+  flex-flow: column nowrap;
+}
+.mess .mess-chat-rolls {
+  flex: 60%;
+  display: block;
+}
+.mess .mess-chat-to-hit,
+.mess .mess-chat-dmg {
+  width: 100%;
+  text-align: center;
+  flex-flow: column;
+  align-items: center;
+  justify-content: flex-start;
+  display: flex;
+}
+.mess .mess-chat-sub-label {
+  font-size: 0.8em;
+  opacity: 0.8;
+  color: var(--font-sub-color);
+  position: relative;
+  top: -0.3em;
+}
+.mess .mess-chat-roll-type {
+  margin: 0.5em 0 0 0;
+  width: 100%;
+}
+.mess-is-gm .mess-gm-info {
+  display: block;
+  border-top: 1px solid #aaa;
+  width: 100%;
+}
+.mess-is-gm .mess-gm-info i {
+  font-size: 0.8em;
+}
+.mess-is-gm .mess-gm-rolls .mess-chat-to-hit,
+.mess-is-gm .mess-gm-rolls .mess-chat-dmg {
+  display: flex;
+}
+.mess-is-gm .mess-gm-rolls .mess-show-btn {
+  display: block;
+}
+.mess-is-gm .mess-gm-rolls .mess-show-players .mess-button-dmg,
+.mess-is-gm .mess-gm-rolls .mess-show-players .mess-button-to-hit {
+  display: block;
+}
+.mess-is-gm .mess-gm-rolls .mess-show-players .mess-button-dmg + label,
+.mess-is-gm .mess-gm-rolls .mess-show-players .mess-button-to-hit + label {
+  display: block;
+}
+.mess-is-gm .mess-gm-rolls .mess-show-players .mess-show-btn {
+  opacity: 1;
+}
+.mess-is-gm .mess-gm-rolls .dice-tooltip {
+  max-width: 100%;
+  overflow: hidden;
+}
+.mess-is-gm .mess-gm-rolls .dice {
+  display: block;
+}
+.mess-gm-rolls .mess-chat-to-hit,
+.mess-gm-rolls .mess-chat-dmg {
+  display: none;
+}
+.mess-gm-rolls .mess-show-players {
+  display: flex;
+}
+.mess-gm-rolls .mess-show-players .mess-dice-result {
+  display: flex;
+}
+.mess-gm-rolls .mess-show-players .mess-button-dmg,
+.mess-gm-rolls .mess-show-players .mess-button-to-hit {
+  display: none;
+}
+.mess-gm-rolls .mess-show-players .mess-button-dmg + label,
+.mess-gm-rolls .mess-show-players .mess-button-to-hit + label {
+  display: none;
+}
+.mess-gm-rolls .dice-tooltip {
+  max-width: 0;
+  overflow: hidden;
+}
+.mess-gm-rolls .dice {
+  display: none;
+}
+.mess-show-btn {
+  opacity: 0.5;
+  height: 0;
+  position: relative;
+  top: -1.25em;
+  align-self: flex-end;
+  display: none;
+}
+.mess-show-btn i:before {
+  content: "\f06e";
+}
+.mess-gm-info {
+  display: none;
+}
+.dnd5e.actor .ability-mod,
+.dnd5e.actor .ability-save {
+  cursor: pointer;
+}
+.dnd5e.actor .ability-mod:hover,
+.dnd5e.actor .ability-save:hover {
+  color: #000;
+  text-shadow: 0 0 10px red;
+  cursor: pointer;
+}
+.dark-mode .dnd5e.actor .ability-mod:hover,
+.dark-mode .dnd5e.actor .ability-save:hover {
+  color: #3F88E6;
+  text-shadow: 0 0 10px #3F88E6;
+}
+.mess.settings {
+  --border-color: #666;
+  --div-border-color: #6666;
+  --div-bg-color: rgba(0, 0, 0, 0.05);
+  --highlight-color: red;
+  --hint-color: #444;
+  max-height: 650px;
+}
+.mess.settings .window-content {
+  padding: 0;
+}
+.mess.settings nav {
+  background: var(--div-bg-color);
+  padding: 6px;
+  margin: 0;
+  margin-bottom: 3px;
+  border-bottom: 1px solid var(--border-color);
+  margin: 0 0 6px 0;
+}
+.mess.settings section {
+  padding: 0.8em;
+}
+.mess.settings a[href] {
+  color: #4a52ca;
+}
+.mess.settings .mess-info {
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  position: relative;
+  top: -0.4em;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  margin: 0;
+  padding: 0 0.3rem;
+}
+.mess.settings .mess-info:before {
+  font-size: 0.6rem;
+  content: "\f059";
+  border: none;
+}
+.mess.settings input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  padding: 0;
+  margin: 0;
+  flex: 0;
+}
+.mess.settings label[for] {
+  cursor: pointer;
+}
+.mess.settings .form-checkbox-group {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  margin: 3px 0;
+}
+.mess.settings .form-checkbox-group label:hover {
+  text-shadow: 0 0 4px var(--highlight-color);
+}
+.mess.settings .form-checkbox-group label:before {
+  font-weight: 400;
+  font-family: "Font Awesome 5 Free";
+  padding: 0 0.3em;
+  content: "\f0c8";
+}
+.mess.settings .form-checkbox-group input:checked + label:before {
+  font-weight: 900;
+  content: "\f14a";
+}
+.mess.settings .mess-hint {
+  flex: 0 100%;
+  padding: 0 1em 0.3em 0;
+  margin-left: 4ch;
+  font-size: 0.9em;
+  color: var(--hint-color);
+}
+.mess.settings .mess-template-chooser {
+  flex: 1;
+  overflow: scroll;
+  background: var(--div-bg-color);
+  padding: 0.5em 0;
+  border: 2px inset var(--div-border-color);
+  border-radius: 0.5em;
+}
+.mess.settings .mess-template-chooser h3 {
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 0.3em;
+  margin: 0;
+}
+.mess.settings .mess-template-chooser .form-group {
+  padding: 0 1em;
+}
+.dark-mode .mess.settings {
+  --border-color: #aaa;
+  --div-bg-color: rgba(150, 150, 150, 0.05);
+  --highlight-color: #7bb4ff;
+  --hint-color: #797979;
+}
