@@ -1,6 +1,6 @@
 import EasyMDE from './easymde/easymde.js';
 
-Hooks.on('ready', () => game.journal.get('Gb3Z2SCBSDp1sEVe').sheet.render(true))
+// Hooks.on('ready', () => game.journal.get('Gb3Z2SCBSDp1sEVe').sheet.render(true))
 
 
 // FormApplication.prototype._createEditor = function(target, editorOptions, initialContent) {
