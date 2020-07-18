@@ -182,7 +182,8 @@ module.exports = class Parser {
         }
         // FVTT Stuff
         case 'secret': {
-          out += this.renderer.secret(token.text);
+          body = this.parse(token.tokens);
+          out += this.renderer.secret(body);
           continue;
         }
         // end FVTT Stuff

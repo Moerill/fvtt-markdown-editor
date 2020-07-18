@@ -229,6 +229,7 @@ module.exports = class Lexer {
       // FVTT stuff
       if (token = this.tokenizer.secret(src)) {
         src = src.substring(token.raw.length);
+        token.tokens = this.blockTokens(token.text, [], true);
         tokens.push(token);
         continue;
       }
@@ -322,6 +323,10 @@ module.exports = class Lexer {
           for (j = 0; j < l2; j++) {
             this.inline(token.items[j].tokens);
           }
+          break;
+        }
+        case 'secret': {
+          this.inline(token.tokens);
           break;
         }
         default: {
