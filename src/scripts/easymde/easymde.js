@@ -18,6 +18,12 @@ var marked = require('./marked/marked.js');
 var isMac = /Mac/.test(navigator.platform);
 var anchorToExternalRegex = new RegExp(/(<a.*?https?:\/\/.*?[^a]>)+?/g);
 
+
+const { block, inline } = require('./marked/rules.js');
+const rules = {
+    block, inline
+};
+
 // Mapping of actions that can be bound to keyboard shortcuts or toolbar buttons
 var bindings = {
     'toggleBold': toggleBold,
@@ -42,6 +48,7 @@ var bindings = {
     'redo': redo,
     'toggleSideBySide': toggleSideBySide,
     'toggleFullScreen': toggleFullScreen,
+    'toggleSecretBlock': toggleSecretBlock
 };
 
 var shortcuts = {
@@ -681,6 +688,40 @@ function toggleCodeBlock(editor) {
             _replaceSelection(cm, false, ['`', '`']);
         }
     }
+}
+
+function toggleSecretBlock(editor) {
+    const secretChars = editor.options.blockStyles.secret;    
+    let cm = editor.codemirror;
+    const text = cm.getSelection();
+    let cur_start = cm.getCursor('start'),
+        cur_end = cm.getCursor('end');
+
+    if (cur_start.line !== cur_end.line || cur_start.ch !== cur_end.ch) {
+        const start_line = cur_start.line,
+              end_line = cur_end.line,
+              end_text = cm.getLineHandle(end_line).text;
+        const orig_text = cm.getRange({line: cur_start.line, ch: 0}, {line: cur_end.line, ch: end_text.length}),
+                cap = rules.block.secret.exec(orig_text);
+        let new_text = orig_text,
+            head, anchor;
+        // remove  $$$ from start and finish if whole selection encompasses exactly one secret block
+        if (cap && cap[0].length === orig_text.length) {
+            new_text = cap[3];
+            head = {line: end_line - 2 , ch: cm.getLineHandle(end_line-1).text.length};
+            anchor = {line: start_line, ch: 0};
+        } else {
+            // Else add  $$$ at start and finish of block
+            new_text = '\n' + secretChars + '\n' + orig_text + '\n' + secretChars + '\n';
+            anchor = {line: start_line + 1, ch: 0};
+            head = {line: end_line + 3, ch: 3};
+        }
+        cm.replaceRange(new_text, {line: cur_start.line, ch: 0}, {line: cur_end.line, ch: end_text.length});
+        cm.setSelection(anchor, head);
+    } else // no selection? just add secret block chars
+        cm.replaceSelection('\n' + secretChars + '\n' + text + '\n' + secretChars + '\n');
+
+    cm.focus();
 }
 
 /**
@@ -1580,6 +1621,7 @@ var blockStyles = {
     'bold': '**',
     'code': '```',
     'italic': '*',
+    'secret': '$$$'
 };
 
 /**
@@ -2659,6 +2701,13 @@ EasyMDE.redo = redo;
 EasyMDE.togglePreview = togglePreview;
 EasyMDE.toggleSideBySide = toggleSideBySide;
 EasyMDE.toggleFullScreen = toggleFullScreen;
+
+EasyMDE.toggleSecretBlock = toggleSecretBlock;
+
+
+EasyMDE.prototype.toggleSecretBlock = function() {
+    toggleSecretBlock(this);
+}
 
 /**
  * Bind instance methods for exports.

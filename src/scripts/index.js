@@ -1,6 +1,6 @@
 import EasyMDE from './easymde/easymde.js';
 
-
+Hooks.on('ready', () => game.journal.get('Gb3Z2SCBSDp1sEVe').sheet.render(true))
 
 
 // FormApplication.prototype._createEditor = function(target, editorOptions, initialContent) {
@@ -49,9 +49,6 @@ Handlebars.registerHelper('editor', function(options) {
 
 
 
-// class FVTTTokenizer extends marked.Tokenizer {
-// }
-
 (function() {
 	const oldActivateListeners = FormApplication.prototype.activateListeners;
 	FormApplication.prototype.activateListeners = function(html) {
@@ -77,9 +74,9 @@ Handlebars.registerHelper('editor', function(options) {
 				"unordered-list",
 				{
 					name: "secret",
-					action: "",
+					action: EasyMDE.toggleSecretBlock,
 					className: "fas fa-user-secret",
-					title: "Secret block"
+					title: "Make Secret block"
 				},
 				"quote",
 				// "code",
@@ -173,7 +170,6 @@ Handlebars.registerHelper('editor', function(options) {
 	const oldEnrichHTML = TextEditor.enrichHTML;
 	TextEditor.enrichHTML = function(content, {secrets=false, entities=true, links=true, rolls=true, rollData=null}={}) {return oldEnrichHTML.bind(this)(content, {secrets, entities: false, links, rolls, rollData})}
 }());
-// Hooks.on('ready', () => game.journal.get('Gb3Z2SCBSDp1sEVe').sheet.render(true))
 
 function saveEditor(editor) {
 	editor.element.parentNode.querySelector('.editor-edit').style.display = null;
