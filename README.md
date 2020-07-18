@@ -1,4 +1,4 @@
-# Markdown Editor [BETA]
+# Meme - Moerrils Efficacious Markdown Editor [BETA] <!-- omit in toc -->
 <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/moerill/fvtt-markdown-editor?style=flat-square"> <img alt="GitHub" src="https://img.shields.io/github/license/moerill/fvtt-markdown-editor?style=flat-square"> <img alt="GitHub Releases" src="https://img.shields.io/github/downloads/moerill/fvtt-markdown-editor/latest/total?style=flat-square">  [![PayPal](https://img.shields.io/badge/Donate-PayPal-blue?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FYZ294SP2JBGS&source=url)
 
 This is a drop in replacement for FVTTs default rich text editor (TinyMCE).  
@@ -6,8 +6,6 @@ While switching between the original editor and this one does not result in bugs
 * Content created through TinyMCE will be displayed correctly in the markdown editor, when previewing. While editing you will see the original HTML.
 * Markdown written through the markdown editor will not be parsed to the correct HTML output, when switching back to the default editor, TinyMCE. But it will not cause problems.
 
-
-- [Markdown Editor [BETA]](#markdown-editor-beta)
 - [Important Information!](#important-information)
 	- [Beta Version](#beta-version)
 	- [Style problems? System/sheet/.. not supported?](#style-problems-systemsheet-not-supported)
