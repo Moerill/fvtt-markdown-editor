@@ -1,4 +1,4 @@
-# Meme - Moerrils Efficacious Markdown Editor [BETA] <!-- omit in toc -->
+# Meme - Moerills Efficacious Markdown Editor [BETA] <!-- omit in toc -->
 <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/moerill/fvtt-markdown-editor?style=flat-square"> <img alt="GitHub" src="https://img.shields.io/github/license/moerill/fvtt-markdown-editor?style=flat-square"> <img alt="GitHub Releases" src="https://img.shields.io/github/downloads/moerill/fvtt-markdown-editor/latest/total?style=flat-square">  [![PayPal](https://img.shields.io/badge/Donate-PayPal-blue?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FYZ294SP2JBGS&source=url)
 
 This is a drop in replacement for FVTTs default rich text editor (TinyMCE).  

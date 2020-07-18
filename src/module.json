@@ -1,7 +1,7 @@
 {
 	"name": "markdown-editor",
 	"title": "MEME - Moerills Efficacious Markdown Editor [BETA]",
-	"description": "This module replaces the default text editor TinyMCE with a markdown editor.<br>For important information, full list of features and a list of keyboard shortcuts, visit <a href='https://github.com/Moerill/fvtt-markdown-editor'>the projects page.</a><br>Please also use the github repo linked above, to provide feedback or for bug reporting.",
+	"description": "This module is currently in beta!<br>This module replaces the default text editor TinyMCE with a markdown editor.<br>For important information, full list of features and a list of keyboard shortcuts, visit <a href='https://github.com/Moerill/fvtt-markdown-editor'>the projects page.</a><br>Please also use the github repo linked above, to provide feedback or for bug reporting.",
 	"version": "0.1.0",
 	"minimumCoreVersion": "0.6.0",
 	"compatibleCoreVersion": "0.7.0",
