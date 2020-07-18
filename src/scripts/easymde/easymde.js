@@ -1002,6 +1002,10 @@ function togglePreview(editor) {
             toolbar.className = toolbar.className.replace(/\s*active\s*/g, '');
             toolbar_div.className = toolbar_div.className.replace(/\s*disabled-for-preview*/g, '');
         }
+
+        // FVTT Change
+        // Remove the extra CSS class to toggle code div visibility
+        wrapper.classList.remove('preview-active');
     } else {
         // When the preview button is clicked for the first time,
         // give some time for the transition from editor.css to fire and the view to slide from right to left,
@@ -1013,6 +1017,9 @@ function togglePreview(editor) {
             toolbar.className += ' active';
             toolbar_div.className += ' disabled-for-preview';
         }
+        // FVTT Change
+        // Add the extra CSS class to toggle code div visibility
+        wrapper.className += ' preview-active';
     }
     preview.innerHTML = editor.options.previewRender(editor.value(), preview);
 
@@ -1955,6 +1962,7 @@ EasyMDE.prototype.render = function (el) {
     keyMaps['Enter'] = 'newlineAndIndentContinueMarkdownList';
     keyMaps['Tab'] = 'tabAndIndentMarkdownList';
     keyMaps['Shift-Tab'] = 'shiftTabAndUnindentMarkdownList';
+    keyMaps['Ctrl-Space'] = 'autocomplete';
 
     // comment this for vim keybindings
 

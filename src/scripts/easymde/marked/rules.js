@@ -5,6 +5,9 @@
  * https://github.com/markedjs/marked
  * 
  * It is partly modified to add some FoundryVTT related functionality.
+ * Added functionality:
+ * - secret blocks
+ * - Entity Links
  */
 
 const {
@@ -41,7 +44,10 @@ const block = {
   // regex template, placeholders will be replaced according to different paragraph
   // interruption rules of commonmark and the original markdown spec:
   _paragraph: /^([^\n]+(?:\n(?!hr|heading|lheading|blockquote|fences|list|html)[^\n]+)*)/,
-  text: /^[^\n]+/
+  text: /^[^\n]+/,
+
+  // FVTT secret block using $$$
+  secret: /^(\${3,}(?=\n)|~{3,})([^\n]*)\n(?:|([\s\S]*?)\n)(?:\1(?:\n+|$)|$)/
 };
 
 block._label = /(?!\s*\])(?:\\[\[\]]|[^\[\]])+/;

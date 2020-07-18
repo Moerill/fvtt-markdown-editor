@@ -39,7 +39,7 @@ Handlebars.registerHelper('editor', function(options) {
   content = TextEditor.enrichHTML(content, {secrets: owner, entities: true});
 
   // Construct the HTML
-	let editor = $(`<div class="editor"><textarea class="editor-content" ${editable ? 'data-editable="true"' : ''} name="${target}" data-edit="${target}">${content}</textarea></div>`);
+	let editor = $(`<div class="editor ${owner ? 'no-secrets' : ''}"><textarea class="editor-content" ${editable ? 'data-editable="true"' : ''} name="${target}">${content}</textarea></div>`);
 
   // Append edit button
 	if ( button && editable ) editor.append($('<a class="editor-edit"><i class="fas fa-edit"></i></a>'));
@@ -53,32 +53,12 @@ Handlebars.registerHelper('editor', function(options) {
 // }
 
 (function() {
-// 	let oldFun = FormApplication.prototype.activateListeners;
-// 	FormApplication.prototype.activateListeners =  function(html) {
-// 		oldFun.bind(this)(html);
+	const oldActivateListeners = FormApplication.prototype.activateListeners;
+	FormApplication.prototype.activateListeners = function(html) {
+		oldActivateListeners.bind(this)(html);
+		html.find('.editor-content').each((i, div) => this._activateEditor(div));
+	}
 
-// 		html[0].querySelectorAll('.editor').forEach(div => {
-// 			console.log(div);
-// 			const textarea = div.querySelector('textarea');
-// 			const target = textarea.name;
-// 			const editable = !!textarea.dataset.editable;
-// 			let editorOptions = {
-// 				element: textarea,
-// 				forceSync: true,
-// 			}
-// 			if (!editable) editorOptions.toolbar = false;
-// 			this.editors[target] = new EasyMDE(editorOptions);
-// 			this.editors[target].codemirror.on('changes', (...args) => console.log(args));
-// 			this.editors[target].togglePreview();
-// 			div.querySelector('.editor-toolbar').style.display = 'none';
-
-// 			const btn = div.querySelector('.editor-edit');
-// 			if (btn)
-// 				btn.addEventListener('click', ev => {
-// 					ev.currentTarget.parentNode.querySelector('.editor-toolbar').style.display = null;
-// 				})
-// 		})
-// 	};
 	FormApplication.prototype._activateEditor =  function(textarea) {
 		const div = textarea.parentNode;
 		const target = textarea.name;
@@ -93,11 +73,16 @@ Handlebars.registerHelper('editor', function(options) {
 				"strikethrough",
 				"heading",
 				"|",
-				"quote",
-				"unordered-list",
 				"ordered-list",
-				"|",
-				"code",
+				"unordered-list",
+				{
+					name: "secret",
+					action: "",
+					className: "fas fa-user-secret",
+					title: "Secret block"
+				},
+				"quote",
+				// "code",
 				"table",
 				"|",
 				"link",
@@ -123,9 +108,10 @@ Handlebars.registerHelper('editor', function(options) {
 				"guide"
 			],
 			shortcuts: {
-				"save": "Ctrl-S"
+				// "save": "Ctrl-S"
 			},
 			status: false,
+			spellChecker: false
 			// renderingConfig: {
 			// 	markedOptions: {
 			// 		tokenizer: new marked.Tokenizer()
@@ -134,18 +120,44 @@ Handlebars.registerHelper('editor', function(options) {
 		}
 		if (!editable) editorOptions.toolbar = false;
 		this.editors[target] = new EasyMDE(editorOptions);
+		this.editors[target].togglePreview();
+
+		if (!editable)
+			return;
+		div.querySelector('.editor-toolbar').classList.add('hidden');
 		this.editors[target].codemirror.on('change', (instance, changeObj) => {
+			// console.log(instance, changeObj)
 			if (changeObj.text.find(e => e === '@')) {
-				
 				instance.showHint({
 					hint: getEntityHints,
 					// closeOnUnfocus: false
 				});
 			}
 		});
+
+		this.editors[target].codemirror.on('drop', (inst, ev) => {
+			ev.preventDefault();
+			const data = JSON.parse(event.dataTransfer.getData('text/plain'));
+			if ( !data ) return;
+
+			const insertIntoEditor = function(link) {
+				inst.replaceSelection(link)
+			}
+			try {
+				if (data.pack) {
+					const pack = game.packs.get(data.pack);
+					pack.getEntity(data.id).then(entity => 
+						insertIntoEditor(`@Compendium[${data.pack}.${data.id}]{${entity.name}}`));
+				} else {
+					const entity = CONFIG[data.type].collection.instance.get(data.id);
+					insertIntoEditor(`@${data.type}[${entity._id}]{${entity.name}}`);
+				}
+					
+			} catch(e) {
+				console.error("Dropped incorrect data!", data);
+			}
+		});
 		// this.editors[target].codemirror.on('shown', () => console.log("SHOWN!"));
-		div.querySelector('.editor-toolbar').classList.add('hidden');
-		this.editors[target].togglePreview();
 
 		const btn = div.querySelector('.editor-edit');
 		if (btn)
@@ -161,7 +173,7 @@ Handlebars.registerHelper('editor', function(options) {
 	const oldEnrichHTML = TextEditor.enrichHTML;
 	TextEditor.enrichHTML = function(content, {secrets=false, entities=true, links=true, rolls=true, rollData=null}={}) {return oldEnrichHTML.bind(this)(content, {secrets, entities: false, links, rolls, rollData})}
 }());
-Hooks.on('ready', () => game.journal.get('Gb3Z2SCBSDp1sEVe').sheet.render(true))
+// Hooks.on('ready', () => game.journal.get('Gb3Z2SCBSDp1sEVe').sheet.render(true))
 
 function saveEditor(editor) {
 	editor.element.parentNode.querySelector('.editor-edit').style.display = null;
@@ -201,20 +213,26 @@ const entityTypes = CONST.ENTITY_LINK_TYPES.map(e => {
 	}
 });
 
+
+
 function getEntityHints(editor, options) {
-	var Pos = editor.constructor.Pos;
-	var cur = editor.getCursor();
-	const entities = CONST.ENTITY_LINK_TYPES.concat("Compendium");
-	const word = editor.findWordAt(cur);
-	const completions = {
-		list: getCompletions(editor.getRange(word.anchor, word.head), entityTypes, options),
-		from: word.head,
-		to: word.anchor
-	}
-	editor.constructor.on(completions, 'pick', (completion) => {
-		startEntityCompletion(editor, completion.displayText, {startAtStart: true});
-	});
-	return completions;
+	return new Promise(function(resolve) {
+		var Pos = editor.constructor.Pos;
+		var cur = editor.getCursor();
+		// const entities = CONST.ENTITY_LINK_TYPES.concat("Compendium");
+		const word = editor.findWordAt(cur);
+		const completions = {
+			list: getCompletions(editor.getRange(word.anchor, word.head), entityTypes, options),
+			from: word.anchor,
+			to: word.head
+		}
+		editor.constructor.on(completions, 'pick', (completion) => {
+			startEntityCompletion(editor, completion.displayText, {startAtStart: true});
+		});
+		if (completions.list.length)
+			resolve(completions);
+		resolve(null);
+	})
 }
 
 function getCompletions(token, keywords, options = {startAtStart: false}) {
@@ -254,8 +272,8 @@ function getEntityNameHints(editor, collection) {
 
 	const completions = {
 		list: getCompletions(editor.getRange(word.anchor, word.head), collection, options),
-		from: word.head,
-		to: word.anchor
+		from: word.anchor,
+		to: word.head
 	}
 	return completions;
 }

@@ -2,41 +2,6 @@
 @import (inline) "easymde.min.css";
 @import (inline) "show-hint.css";
 
-.cm-s-easymde {
-	color: inherit;
-	
-	background: url(../../../ui/parchment.jpg) repeat;
-}
-
-.cm-s-easymde, .editor-preview-active, .editor-preview-side, .editor-toolbar.fullscreen {
-	background: url(../../../ui/parchment.jpg) repeat;
-	color: inherit;
-}
-
-
-.dark-mode {
-	.cm-s-easymde, .editor-preview-active, .editor-preview-side, .editor-toolbar.fullscreen {
-		background: url(../../dnd5e-dark-mode/ui/parchment_dark.jpg) repeat;
-	}
-
-	.editor-toolbar {
-		.active {
-			color: #3f88e6;
-			background: none;
-		}
-
-		i.separator {
-			border-left: 1px solid #ccca;
-		}
-
-		border: 1px solid #ccc3;
-	}
-	.CodeMirror .CodeMirror-cursor{
-		border-left: 1px solid #ccc;
-	}
-}
-
-
 .editor-preview-side, .editor-toolbar.fullscreen {
 	border: none;
 	border-left: 2px groove #ccc9;
@@ -81,21 +46,9 @@
 	height: 100%;
 }
 
-// .journal-sheet form .cm-s-easymde {
-// 	height: calc(100% - 31px);
-// }
-
 .editor-preview pre {
 	background: #eeea;
 	padding: 0.3em;
-}
-
-.dark-mode {
-	.editor-preview {
-		pre {
-			background: #3338;
-		}
-	}
 }
 
 .EasyMDEContainer {
@@ -106,3 +59,20 @@
 .cm-fat-cursor .CodeMirror-cursor {
 	width: 1ch;
 }
+
+.editor .CodeMirror-selected {
+	background: #6665;
+}
+
+// // Hide the original div when preview is shown, to avoid having to use a background (better cross compatibility)
+.cm-s-easymde.preview-active {
+	.CodeMirror-sizer > div{
+		opacity: 0;
+	}
+}
+
+/** 
+* Design changes for specific systems
+*/
+@import "system-changes/core.less";
+@import "system-changes/dnd5e.less";

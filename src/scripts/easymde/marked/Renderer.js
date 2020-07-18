@@ -170,4 +170,9 @@ module.exports = class Renderer {
   text(text) {
     return text;
   }
+
+  // FVTT stuff
+  secret(text) {
+    return '<section class="secret">' + text + '</section>';
+  }
 };

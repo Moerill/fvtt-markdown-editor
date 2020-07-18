@@ -180,6 +180,12 @@ module.exports = class Parser {
           out += top ? this.renderer.paragraph(body) : body;
           continue;
         }
+        // FVTT Stuff
+        case 'secret': {
+          out += this.renderer.secret(token.text);
+          continue;
+        }
+        // end FVTT Stuff
         default: {
           const errMsg = 'Token with "' + token.type + '" type was not found.';
           if (this.options.silent) {

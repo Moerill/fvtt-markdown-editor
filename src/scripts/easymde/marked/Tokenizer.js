@@ -667,6 +667,21 @@ module.exports = class Tokenizer {
   }
 
   // FVTT stuff
+  // block
+  secret(src, tokens) {
+    const cap = this.rules.block.secret.exec(src);
+    if (cap) {
+      const text = cap[3];
+      return {
+        type: 'secret',
+        raw: cap[0],
+        text: text
+      };
+    }
+  }
+
+
+  // inline
   entityLink(src) {
     let match = this.rules.inline.entityLink.exec(src);
     if (match) {

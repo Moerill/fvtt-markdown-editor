@@ -1,0 +1,62 @@
+.dark-mode {
+	.editor .CodeMirror-selected {
+		background: #aaa3;
+	}
+
+	.CodeMirror-fullscreen {
+		.cm-s-easymde, .editor-preview-active, .editor-preview-side, .editor-toolbar {
+			background: url(../../dnd5e-dark-mode/ui/parchment_dark.jpg) repeat;
+		}	
+	}
+	
+	.editor-toolbar {
+		.active {
+			color: #3f88e6;
+			background: none;
+		}
+
+		i.separator {
+			border-left: 1px solid #ccca;
+		}
+
+		border: 1px solid #ccc3;
+	}
+	.CodeMirror .CodeMirror-cursor{
+		border-left: 1px solid #ccc;
+	}
+
+
+
+	.editor-preview {
+		pre {
+			background: #3338;
+		}
+}
+}
+
+.tidy5e {
+	.editor-toolbar.fullscreen, .CodeMirror-fullscreen.cm-s-easymde, .CodeMirror-fullscreen.editor-preview-active, &.editor-preview-side {
+		// move fullscreen infront of the exhaustion smiley
+		z-index: 11;
+	}
+	
+	.CodeMirror, .EasyMDEContainer, .CodeMirror-sizer {
+		min-height: 50px;
+	}
+
+	.biography-notes {
+		.CodeMirror, .EasyMDEContainer, .CodeMirror-sizer {
+			min-height: 271px;
+		}
+	}
+
+	.journal-notes {
+		.CodeMirror, .EasyMDEContainer, .CodeMirror-sizer {
+			min-height: 382px;
+		}
+	}
+
+	.CodeMirror-scroll {
+		padding-bottom: 0;
+	}
+}

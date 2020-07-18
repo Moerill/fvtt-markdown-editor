@@ -1,12 +1,33 @@
-# Markdown Editor
-<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/moerill/fvtt-markdown-editor?style=flat-square"> <img alt="GitHub" src="https://img.shields.io/github/license/moerill/fvtt-markdown-editor?style=flat-square"> <img alt="GitHub Releases" src="https://img.shields.io/github/downloads/moerill/fvtt-markdown-editor/latest/total?style=flat-square">  [![PayPal](https://img.shields.io/badge/Donate-PayPal-blue?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FYZ294SP2JBGS&source=url)  
+# Markdown Editor [BETA]
+<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/moerill/fvtt-markdown-editor?style=flat-square"> <img alt="GitHub" src="https://img.shields.io/github/license/moerill/fvtt-markdown-editor?style=flat-square"> <img alt="GitHub Releases" src="https://img.shields.io/github/downloads/moerill/fvtt-markdown-editor/latest/total?style=flat-square">  [![PayPal](https://img.shields.io/badge/Donate-PayPal-blue?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FYZ294SP2JBGS&source=url)
 
-This is a drop in replacement for FVTTs default rich text editor (TinyMCE). 
+This is a drop in replacement for FVTTs default rich text editor (TinyMCE).  
+While switching between the original editor and this one does not result in bugs, it will behave like so:
+* Content created through TinyMCE will be displayed correctly in the markdown editor, when previewing. While editing you will see the original HTML.
+* Markdown written through the markdown editor will not be parsed to the correct HTML output, when switching back to the default editor, TinyMCE. But it will not cause problems.
+
+
+- [Markdown Editor [BETA]](#markdown-editor-beta)
+- [Important Information!](#important-information)
+	- [Beta Version](#beta-version)
+	- [Style problems? System/sheet/.. not supported?](#style-problems-systemsheet-not-supported)
+	- [Bug Reporting](#bug-reporting)
+	- [Atribution](#atribution)
+	- [Licensing](#licensing)
+	- [Support the development](#support-the-development)
+- [Features](#features)
+	- [Enhanced Markdown Syntax](#enhanced-markdown-syntax)
+	- [Keyboard shortcuts](#keyboard-shortcuts)
+	- [Entity Link Autocompletion](#entity-link-autocompletion)
+	- [VIM Keybindings](#vim-keybindings)
 
 # Important Information!
-## this is a work-in-progress!
-This module is heavily work in progress. I do not advise to use this outside of a testing environment!  
-Also: please provide as much feedback and suggestions as possible!
+## Beta Version
+This module is Beta. I do feel quite confident that it does work and doesn't break stuff, but please still be careful.  
+*Also this means: I'm in big need of feedback! Tell me what is awesome, what doesn't work and/or what you'd like to improve upon!*
+
+## Style problems? System/sheet/.. not supported?
+If your system/sheet/... has some styling issues with this editor, please contact me aboutb it and **ideally** send me the css to fix it! I'll be happy to incorporate it. But i can't check every module or system myself, there are to many.
 
 ## Bug Reporting
 Go to the [GitHub's issue board](https://github.com/Moerill/fvtt-markdown-editor/issues) and check if the Bug is already reported. If not first test with all other modules disabled! If the bug persists create a new issue, with at least the following information:
@@ -42,3 +63,40 @@ This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agr
 Want to help me develop? Send a merge request on this gitlab or contact me on Discord (Moerill#7205).  
 Want to support me in another way? 
 Leave me some nice comments (e.g. on Discord), recommend this module to others and/or leave a donation over at my [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FYZ294SP2JBGS&source=url).
+
+# Features
+## Enhanced Markdown Syntax
+List of extra markdown Syntax
+- FVTT style secret blocks using ``$$$`` at the start and end of a block, like:
+  ```
+	$$$
+	secret 
+	block
+	$$$
+	```
+
+## Keyboard shortcuts
+
+Shortcut (Windows / Linux) | Shortcut (macOS) | Action
+:--- | :--- | :---
+*Ctrl-B* | *Cmd-B* | toggle bold
+*Ctrl-I* | *Cmd-I* | toggle italic
+*Ctrl-H* | *Cmd-H* | toggle header size (big to small)
+*Shift-Ctrl-H* | *Shift-Cmd-H* | toggle header size (small to big)
+*Ctrl-'* | *Cmd-'* | toggle blockquote
+*Ctrl-Alt-C* | *Cmd-Alt-C* | toggle code block
+*Ctrl-Alt-L* | *Cmd-Alt-L* | toggle ordered list
+*Ctrl-L* | *Cmd-L* | toggle unordered list
+*Ctrl-K* | *Cmd-K* | add link template
+*Ctrl-Alt-I* | *Cmd-Alt-I* | add image template
+*Ctrl-P* | *Cmd-P* | toggle preview
+*F9* | *F9* | toggle side by side view
+*F11* | *F11* | toggle full screen view
+
+## Entity Link Autocompletion
+![autocomplete preview](img/markdown-autocomplete.gif)
+Autocompletes your Entity links and replacing the name using the ID. Just write an ``@`` and it will the entity type. When the entity type was chosen it will supply a list of all world entities of that type.  
+Compendia are currently not supported, but will come with a future update.  
+
+## VIM Keybindings
+You can enable VIM Keybindings for the editor, inside FVTTs Settings menu. This setting is user specific.

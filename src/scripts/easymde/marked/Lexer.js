@@ -226,6 +226,14 @@ module.exports = class Lexer {
         continue;
       }
 
+      // FVTT stuff
+      if (token = this.tokenizer.secret(src)) {
+        src = src.substring(token.raw.length);
+        tokens.push(token);
+        continue;
+      }
+      // End FVTT stuff
+
       // top-level paragraph
       if (top && (token = this.tokenizer.paragraph(src))) {
         src = src.substring(token.raw.length);
@@ -442,9 +450,8 @@ module.exports = class Lexer {
 
       // FVTT stuff
       if (token = this.tokenizer.entityLink(src)) {
-        console.log(src)
         src = src.substring(token.raw.length);
-        console.log(src, token, token.raw.length)
+
         tokens.push(token);
         continue;
       }

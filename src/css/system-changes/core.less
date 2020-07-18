@@ -1,0 +1,30 @@
+.cm-s-easymde {
+	color: inherit;
+}
+
+.cm-s-easymde, .editor-preview-active, .editor-preview-side, .editor-toolbar.fullscreen {
+	background: none;
+
+	color: inherit;
+}
+
+// Add default background for fullscreen mode
+.editor-toolbar.fullscreen, .CodeMirror-fullscreen.cm-s-easymde, .CodeMirror-fullscreen.editor-preview-active, &.editor-preview-side {
+	background: url(../../../ui/parchment.jpg) repeat;
+}
+
+.cm-s-easymde .cm-s-formatting-quote {
+	color: #333;
+}
+
+.secret {
+	display: none;
+}
+
+.no-secrets .editor-preview-full .secret {
+	display: block;
+}
+
+.journal-sheet form .cm-s-easymde {
+	height: calc(100% - 31px);
+}
