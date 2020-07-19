@@ -63,10 +63,12 @@ Handlebars.registerHelper('editor', function(options) {
 		const target = textarea.name;
 		
 		// Trying to avoid the strange handlebars partial indentation issues by just inserting the content now
-		let content = getProperty(this.object.data, target);
-		// Maybe the editor is used for something not adhering to the regular entity data structure, then try to get the data without the additional "data" key
-		if (!content)
-			content = getProperty(this.object, target);
+		let content = getProperty(this.object.data, target)
+			// Maybe the editor is used for something not adhering to the regular entity data structure, then try to get the data without the additional "data" key
+			|| getProperty(this.object, target)
+			// If all else fails, use an empty string.
+			|| '';
+
 		textarea.innerHTML = content;
 		const editable = !!textarea.dataset.editable;
 		let editorOptions = {
