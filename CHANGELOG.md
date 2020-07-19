@@ -1,3 +1,7 @@
+# v0.2.4
+Thanks to æatomdmac  for helping this and last hotfix.
+- Now unregistering the original editor handlebars helper before registering my own, just to be sure. 
+
 # v0.2.3
 
 - trying to fix some extra spaces added in cases where the rendered application does call the handlebars editor helper inside of a partial. (See https://github.com/Moerill/fvtt-markdown-editor/issues/1 )

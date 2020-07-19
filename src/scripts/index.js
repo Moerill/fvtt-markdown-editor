@@ -27,6 +27,7 @@ Hooks.on('init', function() {
 	})
 });
 
+Handlebars.unregisterHelper('editor');
 Handlebars.registerHelper('editor', function(options) {
   let target = options.hash['target'],
       content = options.hash['content'] || "",
