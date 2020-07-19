@@ -39,11 +39,20 @@ Handlebars.registerHelper('editor', function(options) {
   content = TextEditor.enrichHTML(content, {secrets: owner, entities: true});
 
   // Construct the HTML
-	let editor = $(`<div class="editor ${owner ? 'no-secrets' : ''}"><textarea class="editor-content" ${editable ? 'data-editable="true"' : ''} name="${target}">${content}</textarea></div>`);
+	let editor = $(`<div class="editor ${owner ? 'no-secrets' : ''}"><textarea class="editor-content" ${editable ? 'data-editable="true"' : ''} name="${target}" data-dtype="String">
+	<p>asd
+	<p>asd</p>
+	</p>
+	<p>
+	asd2
+	<p>asd3
+	</p>
+	</p></textarea></div>`);
+	// let editor = $(`<div class="editor ${owner ? 'no-secrets' : ''}"><textarea class="editor-content" ${editable ? 'data-editable="true"' : ''} name="${target}" data-dtype="String"></textarea></div>`);
 
   // Append edit button
 	if ( button && editable ) editor.append($('<a class="editor-edit"><i class="fas fa-edit"></i></a>'));
-	
+	console.log(duplicate(new Handlebars.SafeString(editor[0].outerHTML)))
   return new Handlebars.SafeString(editor[0].outerHTML);
 });
 
@@ -57,8 +66,12 @@ Handlebars.registerHelper('editor', function(options) {
 	}
 
 	FormApplication.prototype._activateEditor =  function(textarea) {
+		return;
 		const div = textarea.parentNode;
 		const target = textarea.name;
+		console.log(this.object);
+		const content = getProperty(this.object.data, target);
+		textarea.innerHTML = content;
 		const editable = !!textarea.dataset.editable;
 		let editorOptions = {
 			element: textarea,
