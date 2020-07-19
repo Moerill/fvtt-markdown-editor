@@ -39,16 +39,8 @@ Handlebars.registerHelper('editor', function(options) {
   content = TextEditor.enrichHTML(content, {secrets: owner, entities: true});
 
   // Construct the HTML
-	let editor = $(`<div class="editor ${owner ? 'no-secrets' : ''}"><textarea class="editor-content" ${editable ? 'data-editable="true"' : ''} name="${target}" data-dtype="String">
-	<p>asd
-	<p>asd</p>
-	</p>
-	<p>
-	asd2
-	<p>asd3
-	</p>
-	</p></textarea></div>`);
-	// let editor = $(`<div class="editor ${owner ? 'no-secrets' : ''}"><textarea class="editor-content" ${editable ? 'data-editable="true"' : ''} name="${target}" data-dtype="String"></textarea></div>`);
+	// let editor = $(`<div class="editor ${owner ? 'no-secrets' : ''}"><textarea class="editor-content" ${editable ? 'data-editable="true"' : ''} name="${target}" data-dtype="String">${content}</textarea></div>`);
+	let editor = $(`<div class="editor ${owner ? 'no-secrets' : ''}"><textarea class="editor-content" ${editable ? 'data-editable="true"' : ''} name="${target}" data-dtype="String"></textarea></div>`);
 
   // Append edit button
 	if ( button && editable ) editor.append($('<a class="editor-edit"><i class="fas fa-edit"></i></a>'));
@@ -66,11 +58,14 @@ Handlebars.registerHelper('editor', function(options) {
 	}
 
 	FormApplication.prototype._activateEditor =  function(textarea) {
-		return;
 		const div = textarea.parentNode;
 		const target = textarea.name;
-		console.log(this.object);
-		const content = getProperty(this.object.data, target);
+		
+		// Trying to avoid the strange handlebars partial indentation issues by just inserting the content now
+		let content = getProperty(this.object.data, target);
+		// Maybe the editor is used for something not adhering to the regular entity data structure, then try to get the data without the additional "data" key
+		if (!content)
+			content = getProperty(this.object, target);
 		textarea.innerHTML = content;
 		const editable = !!textarea.dataset.editable;
 		let editorOptions = {

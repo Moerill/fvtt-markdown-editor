@@ -176,3 +176,6 @@ li.CodeMirror-hint-active {
 .tidy5e .CodeMirror-scroll {
   padding-bottom: 0;
 }
+.dnd5e.sheet.item .editor-toolbar button {
+  color: inherit;
+}
