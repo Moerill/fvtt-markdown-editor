@@ -1,5 +1,9 @@
+# v0.2.5
+Thanks to Github User @Atomdmac for providing this fix!
+- *Fix* Editors bound to empty values showed 'undefined'.
+
 # v0.2.4
-Thanks to æatomdmac  for helping this and last hotfix.
+Thanks to @Atomdmac  for helping this and last hotfix.
 - Now unregistering the original editor handlebars helper before registering my own, just to be sure. 
 
 # v0.2.3
