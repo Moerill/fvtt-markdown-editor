@@ -1,5 +1,11 @@
 import EasyMDE from './easymde/easymde.js';
 
+import {initChatEditor} from './chat-editor.js';
+import {renderWelcomeScreen} from './welcome-screen.js';
+renderWelcomeScreen();
+
+initChatEditor();
+
 // Hooks.on('ready', () => game.journal.get('Gb3Z2SCBSDp1sEVe').sheet.render(true))
 
 Hooks.on('init', function() {
@@ -132,7 +138,12 @@ Handlebars.registerHelper('editor', function(options) {
 
 		this.editors[target].codemirror.on('drop', (inst, ev) => {
 			ev.preventDefault();
-			const data = JSON.parse(event.dataTransfer.getData('text/plain'));
+			let data;
+			try {	// catch stuff that is not correctly formatted.. like  accidently dropping "just plain text drags"
+				data = JSON.parse(event.dataTransfer.getData('text/plain'));
+			} catch (e) {
+				return;
+			}
 			if ( !data ) return;
 
 			const insertIntoEditor = function(link) {

@@ -88,13 +88,22 @@ li.CodeMirror-hint-active {
   height: 100%;
 }
 .cm-fat-cursor .CodeMirror-cursor {
-  width: 1ch;
+  width: 1.2ch;
 }
-.editor .CodeMirror-selected {
+.editor .CodeMirror-selected,
+#chat-form .CodeMirror-selected {
   background: #6665;
 }
 .cm-s-easymde.preview-active .CodeMirror-sizer > div {
   opacity: 0;
+}
+.CodeMirror-dialog {
+  position: relative;
+  top: -1em;
+}
+#chat-form .CodeMirror-dialog {
+  position: relative;
+  top: -2em;
 }
 /** 
 * Design changes for specific systems
@@ -126,6 +135,14 @@ li.CodeMirror-hint-active {
 }
 .journal-sheet form .cm-s-easymde {
   height: calc(100% - 31px);
+}
+#chat-form .cm-s-easymde {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  background: url(../../../ui/parchment.jpg) repeat;
+  color: #333;
+  padding: 0;
 }
 .dark-mode .editor .CodeMirror-selected {
   background: #aaa3;

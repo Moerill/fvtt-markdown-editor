@@ -1,3 +1,8 @@
+# v0.3
+- *NEW* chat input form now supports markdown as well!
+  - Recalling last messages is moved from the default arrow keys to Page-Up/-Down. Leaving arrow keys 
+- *Fix* VIM command line positioning
+
 # v0.2.6
 - *Fix* Users being able to see Entitie names they don't have access to using autocomplete.
 

@@ -57,10 +57,10 @@
 
 // experimental
 .cm-fat-cursor .CodeMirror-cursor {
-	width: 1ch;
+	width: 1.2ch;
 }
 
-.editor .CodeMirror-selected {
+.editor .CodeMirror-selected, #chat-form .CodeMirror-selected {
 	background: #6665;
 }
 
@@ -68,6 +68,18 @@
 .cm-s-easymde.preview-active {
 	.CodeMirror-sizer > div{
 		opacity: 0;
+	}
+}
+
+.CodeMirror-dialog {
+	position: relative;
+	top: -1em;
+}
+
+#chat-form {
+	.CodeMirror-dialog {
+		position: relative;
+		top: -2em;
 	}
 }
 

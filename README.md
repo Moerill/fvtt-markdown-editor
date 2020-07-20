@@ -18,6 +18,7 @@ While switching between the original editor and this one does not result in bugs
 	- [Keyboard shortcuts](#keyboard-shortcuts)
 	- [Entity Link Autocompletion](#entity-link-autocompletion)
 	- [VIM Keybindings](#vim-keybindings)
+	- [Chat](#chat)
 
 # Important Information!
 ## Beta Version
@@ -98,3 +99,7 @@ Compendia are currently not supported, but will come with a future update.
 
 ## VIM Keybindings
 You can enable VIM Keybindings for the editor, inside FVTTs Settings menu. This setting is user specific.
+
+## Chat
+The chat input form does support markdown as well.  
+To recall last send messages use *Page-Up/-Down* to cycle through your old messages.

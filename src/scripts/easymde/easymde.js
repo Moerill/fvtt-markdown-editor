@@ -48,7 +48,10 @@ var bindings = {
     'redo': redo,
     'toggleSideBySide': toggleSideBySide,
     'toggleFullScreen': toggleFullScreen,
-    'toggleSecretBlock': toggleSecretBlock
+    'toggleSecretBlock': toggleSecretBlock,
+    'chatSendMessage': chatSendMessage,
+    'chatRecallMessageUp': chatRecallMessageUp,
+    'chatRecallMessageDown': chatRecallMessageDown
 };
 
 var shortcuts = {
@@ -380,6 +383,44 @@ function toggleFullScreen(editor) {
     }
 }
 
+/**
+ * FVTT action
+ */
+function chatSendMessage(editor) {
+    const textarea = editor.element;
+    if (!editor.value()) return;
+    let message = editor.value();
+    // if rollcommand, leave it be
+    let [command, match] = ui.chat.constructor.parse(message);
+    // on whisper, move the whisper target outside of the parsed tetx
+    if (command === "whisper") {
+        message = match[1]+match[2]+ ' ' + marked(match[3]).replace(/\n/g, '')
+        // similar for ooc, iic, emote
+    } else if (["ic", "ooc", "emote"].includes(command)){
+        message = match[1]+ ' ' + marked(match[2]).replace(/\n/g, '')
+    }else if (command === "none")
+        message = marked(message).replace(/\n/g, '');
+
+    // Prepare chat message data and handle result
+    ui.chat.processMessage(message).then(() => {
+        ui.chat._remember(editor.value());
+        textarea.value = "";
+        editor.value('');
+    }).catch(error => {
+        ui.notifications.error(error);
+        throw error;
+    });
+}
+
+
+function chatRecallMessageUp(editor) {
+    editor.value(ui.chat._recall(1));
+}
+
+
+function chatRecallMessageDown(editor) {
+    editor.value(ui.chat._recall(-1));
+}
 
 /**
  * Action for toggling bold.
@@ -2001,7 +2042,8 @@ EasyMDE.prototype.render = function (el) {
         }
     }
 
-    keyMaps['Enter'] = 'newlineAndIndentContinueMarkdownList';
+    if (!keyMaps['Enter'])
+        keyMaps['Enter'] = 'newlineAndIndentContinueMarkdownList';
     keyMaps['Tab'] = 'tabAndIndentMarkdownList';
     keyMaps['Shift-Tab'] = 'shiftTabAndUnindentMarkdownList';
     keyMaps['Ctrl-Space'] = 'autocomplete';
@@ -2064,6 +2106,7 @@ EasyMDE.prototype.render = function (el) {
         inputStyle: (options.inputStyle != undefined) ? options.inputStyle : isMobile() ? 'contenteditable' : 'textarea',
         spellcheck: (options.nativeSpellcheck != undefined) ? options.nativeSpellcheck : true,
     }
+    console.log("VIM", game.settings.get('markdown-editor', 'vim-mode'))
     if (game.settings.get('markdown-editor', 'vim-mode'))
         codemirrorOptions.keyMap = "vim";
 
