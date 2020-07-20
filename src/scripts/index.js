@@ -38,7 +38,7 @@ Handlebars.registerHelper('editor', function(options) {
 
   // Append edit button
 	if ( button && editable ) editor.append($('<a class="editor-edit"><i class="fas fa-edit"></i></a>'));
-	console.log(duplicate(new Handlebars.SafeString(editor[0].outerHTML)))
+
   return new Handlebars.SafeString(editor[0].outerHTML);
 });
 

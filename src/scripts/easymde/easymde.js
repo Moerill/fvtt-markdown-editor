@@ -2106,7 +2106,7 @@ EasyMDE.prototype.render = function (el) {
         inputStyle: (options.inputStyle != undefined) ? options.inputStyle : isMobile() ? 'contenteditable' : 'textarea',
         spellcheck: (options.nativeSpellcheck != undefined) ? options.nativeSpellcheck : true,
     }
-    console.log("VIM", game.settings.get('markdown-editor', 'vim-mode'))
+    
     if (game.settings.get('markdown-editor', 'vim-mode'))
         codemirrorOptions.keyMap = "vim";
 
