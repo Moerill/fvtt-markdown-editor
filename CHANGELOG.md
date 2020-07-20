@@ -1,3 +1,6 @@
+# v0.2.6
+- *Fix* Users being able to see Entitie names they don't have access to using autocomplete.
+
 # v0.2.5
 Thanks to Github User @Atomdmac for providing this fix!
 - *Fix* Editors bound to empty values showed 'undefined'.

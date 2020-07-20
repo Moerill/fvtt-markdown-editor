@@ -2,19 +2,6 @@ import EasyMDE from './easymde/easymde.js';
 
 // Hooks.on('ready', () => game.journal.get('Gb3Z2SCBSDp1sEVe').sheet.render(true))
 
-
-// FormApplication.prototype._createEditor = function(target, editorOptions, initialContent) {
-// 	// console.log("lalalalal")
-// 	// console.log(target, editorOptions, initialContent);
-// 	// // const textarea = document.createElement('textarea');
-// 	// // textarea.innerHTML = editorOptions.target.innerHTML;
-// 	// // editorOptions.target.parentNode.replaceChild(textarea, editorOptions.target);
-// 	// console.log(new EasyMDE({
-// 	// 	element: editorOptions.target,
-// 	// 	forceSync: true
-// 	// }));
-// }
-
 Hooks.on('init', function() {
 	game.settings.register('markdown-editor', 'vim-mode', {
 		name: 'VIM Keybindings',
@@ -243,12 +230,6 @@ function getEntityHints(editor, options) {
 }
 
 function getCompletions(token, keywords, options = {startAtStart: false}) {
-	// keywords = keywords.map(e => {
-	// 	return {
-	// 		text: e + "[",
-	// 		displayText: e
-	// 	}
-	// })
 	if (token === "@" || token === "[")
 		return keywords.map(e => {
 			return {...e, ...{text: token + e.text}};
@@ -258,8 +239,8 @@ function getCompletions(token, keywords, options = {startAtStart: false}) {
 }
 
 function startEntityCompletion(editor, type) {
-	const coll = CONFIG[type].collection.instance;
-	const collection = coll.entries.map(e => {
+	const coll = CONFIG[type].collection.instance.filter(e => e.visible);
+	const collection = coll.map(e => {
 		return {
 			text: e.id + "]{" + e.name + "}",
 			displayText: e.name
