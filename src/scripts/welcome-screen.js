@@ -15,6 +15,7 @@ export const renderWelcomeScreen = function() {
 			return;
 		
 
+		game.settings.set(title, "version", moduleVersion);
 		class WelcomeScreen extends Application {
 			static get defaultOptions() {
 				const options = super.defaultOptions;
@@ -31,14 +32,15 @@ export const renderWelcomeScreen = function() {
 				super.activateListeners(html);
 
 				html.find('.show-again').on('change', ev => {
-					let val = "0.0.0";
-					if (ev.currentTarget.checked)
+					let val = "0.0";
+					if (ev.currentTarget.checked) 
 						val = moduleVersion;
 
 					game.settings.set(title, "version", val);
 				})
 			}
 		}
+
 
 		(new WelcomeScreen()).render(true);
 	});

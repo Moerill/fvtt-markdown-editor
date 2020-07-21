@@ -1,3 +1,6 @@
+# v0.3.1
+- *Fix* Changelog popup popping up again, even though checkbox is set per default.
+
 # v0.3
 - *NEW* chat input form now supports markdown as well!
   - Recalling last messages is moved from the default arrow keys to Page-Up/-Down. Leaving arrow keys 
