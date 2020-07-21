@@ -62,7 +62,7 @@ function getManifest() {
  * Build Less
  */
 function buildLess() {
-	return gulp.src('src/css/*.less').pipe(concat('mess.less')).pipe(less()).pipe(gulp.dest('dist/css/')).pipe(browserSync.stream());
+	return gulp.src('src/css/*.less').pipe(concat('markdown-editor.less')).pipe(less()).pipe(gulp.dest('dist/css/')).pipe(browserSync.stream());
 }
 
 
