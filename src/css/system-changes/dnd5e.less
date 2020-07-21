@@ -62,6 +62,17 @@
 }
 
 // Tidy5e Item sheet styling fix
-.dnd5e.sheet.item .editor-toolbar button {
-	color: inherit;
+.dnd5e.sheet.item {
+	.editor-toolbar button {
+		color: inherit;
+	}
+
+	// Overflow fix
+	.tab.flexrow {
+		flex-wrap: nowrap;
+	}
+
+	.editor {
+		max-width: calc(100% - 120px);
+	}
 }

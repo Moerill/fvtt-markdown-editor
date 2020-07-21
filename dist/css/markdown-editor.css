@@ -196,3 +196,13 @@ li.CodeMirror-hint-active {
 .dnd5e.sheet.item .editor-toolbar button {
   color: inherit;
 }
+.dnd5e.sheet.item .tab.flexrow {
+  flex-wrap: nowrap;
+}
+.dnd5e.sheet.item .editor {
+  max-width: calc(100% - 120px);
+}
+.pf2e.sheet .EasyMDEContainer span,
+.pf2e.sheet .EasyMDEContainer label {
+  display: inline;
+}

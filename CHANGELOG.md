@@ -1,3 +1,7 @@
+# v0.3.2
+- *Fix* [PF2e] funky behaviour for item sheets. https://github.com/Moerill/fvtt-markdown-editor/issues/8
+- *Fix* [DnD5e] Item sheet infinite width editor.
+
 # v0.3.1
 - *Fix* Changelog popup popping up again, even though checkbox is set per default.
 
