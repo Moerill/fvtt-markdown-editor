@@ -245,7 +245,7 @@ function getCompletions(token, keywords, options = {startAtStart: false}) {
 		return keywords.map(e => {
 			return {...e, ...{text: token + e.text}};
 		});
-	const regex = new RegExp(`${options.startAtStart ? '^' : ''}${token}`);
+	const regex = new RegExp(`${options.startAtStart ? '^' : ''}${token}`, 'i');
 	return keywords.filter(e => regex.exec(e.text));
 }
 
