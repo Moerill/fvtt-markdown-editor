@@ -685,9 +685,6 @@ module.exports = class Tokenizer {
   entityLink(src) {
     let match = this.rules.inline.entityLink.exec(src);
     if (match) {
-      console.log(match);
-      console.log(TextEditor._replaceContentLinks(match[0], match[1], match[2], match[3]));
-      // console.log(TextEditor._replaceContentLinks(match[0], match[1], match[2], match[3]))
       return {
         type: 'entityLink',
         raw: match[0],
