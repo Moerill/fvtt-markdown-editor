@@ -1,0 +1,104 @@
+
+@import (inline) "easymde.min.css";
+// @import (inline) "show-hint.css";
+
+.editor-preview-side, .editor-toolbar.fullscreen {
+	border: none;
+	border-left: 2px groove #ccc9;
+}
+
+.editor-toolbar {
+	& i.separator {
+		border-left: 1px solid #666a;
+		// border-right: 1px solid #9998;
+		border-right: none;
+	}
+
+	border: 1px solid #6666;
+
+	&:before, &:after {
+		margin: 1px;
+	}
+	
+	&.fullscreen {
+		filter: brightness(0.8);
+		box-shadow: 0 0 10px inset rgba(0,0,0, 0.5);
+
+		&:before, &:after {
+			display: none;
+		}
+	}
+}
+
+.editor {
+	.editor-toolbar ~ .cm-s-easymde {
+		height: calc(100% - 38px);
+	}
+	.editor-toolbar.hidden ~ .cm-s-easymde {
+		height: 100%;
+	}
+	.editor-toolbar.hidden {
+		display: none;
+	}
+}
+.cm-s-easymde {
+	border: none;
+	height: 100%;
+}
+
+.editor-preview pre {
+	background: #eeea;
+	padding: 0.3em;
+}
+
+.EasyMDEContainer {
+  height: 100%;
+  width: 100%;
+}
+
+// experimental
+.cm-fat-cursor .CodeMirror-cursor {
+	width: 1.2ch;
+}
+
+.editor .CodeMirror-selected, #chat-form .CodeMirror-selected {
+	background: #6665;
+}
+
+// // Hide the original div when preview is shown, to avoid having to use a background (better cross compatibility)
+// .cm-s-easymde.preview-active {
+// 	.CodeMirror-sizer > div{
+// 		opacity: 0;
+// 	}
+// }
+
+// Hide the original div when preview is shown, to avoid having to use a background (better cross compatibility)
+// Better way, using css only. 
+.disabled-for-preview + .cm-s-easymde .CodeMirror-scroll {
+  opacity: 0;
+}
+
+.cm-s-easymde.preview-only .CodeMirror-sizer > div {
+  opacity: 0;
+}
+
+.CodeMirror-dialog-bottom {
+	position: relative;
+	top: -1em;
+  backdrop-filter: blur(0.2em);
+  z-index: 2;  
+}
+
+#chat-form {
+	.CodeMirror-dialog {
+		position: relative;
+		top: -2em;
+	}
+}
+
+/** 
+* Design changes for specific systems
+*/
+@import "system-changes/core.less";
+@import "system-changes/dnd5e.less";
+@import "system-changes/pf2e.less";

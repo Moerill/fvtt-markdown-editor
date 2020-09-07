@@ -1,3 +1,26 @@
+# v0.4.0
+
+In my opinion this module is now feature complete and is now officially released!  
+
+- Removed entity autocompletion, in favor of proper integration of @Sunspots [Quick Insert](https://gitlab.com/fvtt-modules-lab/quick-insert/) module! (You have to manually install the quick insert module, but it should work out of the box together with MEME)
+- Improved and added compatibility with so many mods! Should be compatible with most modules now!
+  - Added compatibility with [Foriens Quest Log](https://github.com/Forien/foundryvtt-forien-quest-log/)
+  - [Emojule](https://github.com/Moerill/emojule/) support!
+  - [Quick Insert](https://gitlab.com/fvtt-modules-lab/quick-insert/) 
+- Restructured the whole code for better maintainability and extensibility
+  - Added a PluginManager to allow for other modules to enhance MEMEs features. (Documentation still missing, take a look at the quick-insert integration as example)
+- Switched renderer to use [markdown-it](https://github.com/markdown-it/markdown-it) instead of marked for easier and better extensibility
+- Created a settings menu with some basic information and toggles for:
+  - chat markdown support
+  - rich text editor markdown support
+- Removed the welcome screen popup by popular request. All the important information will now be shown in the settings menu. You now need to check the Changelog linked there yourself!
+- When starting to edit the view will jump to the end of the document. (I decided to do this, since imo more often one wants to add stuff to the end instead of the beginning.)
+- *FIX* dropped entity links not appearing at the shown position
+- *FIX* entity links and not being rendered properly in some non MEME places
+- *FIX* some visual bugs caused in tidy 5e sheet and some other places. 
+- *FIX* Chat box shrinking with Ernies Modern UI
+
+
 # v0.3.2
 - *Fix* [PF2e] funky behaviour for item sheets. https://github.com/Moerill/fvtt-markdown-editor/issues/8
 - *Fix* [DnD5e] Item sheet infinite width editor.

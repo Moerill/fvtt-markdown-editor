@@ -15,30 +15,15 @@ const webpackConfig = require('./webpack.config.js');
 const browserSync = require('browser-sync').create();
 
 
-
-function getConfig() {
-	const configPath = path.resolve(process.cwd(), 'foundryconfig.json');
-	let config;
-
-	if (fs.existsSync(configPath)) {
-		config = fs.readJSONSync(configPath);
-		return config;
-	} else {
-		return;
-	}
-}
+const moduleName = "fvtt-markdown-editor";
+const repoBaseUrl = 'https://github.com/Moerill/';
+const rawBaseUrl = 'https://raw.githubusercontent.com/Moerill/'
 
 function getManifest() {
-	const json = {};
+	const json = {root: ''};
 
-	if (fs.existsSync('src')) {
-		json.root = 'src';
-	} else {
-		json.root = 'dist';
-	}
-
-	const modulePath = path.join(json.root, 'module.json');
-	const systemPath = path.join(json.root, 'system.json');
+	const modulePath = 'module.json';
+	const systemPath = 'system.json';
 
 	if (fs.existsSync(modulePath)) {
 		json.file = fs.readJSONSync(modulePath);
@@ -53,7 +38,6 @@ function getManifest() {
 	return json;
 }
 
-
 /********************/
 /*		BUILD		*/
 /********************/
@@ -62,37 +46,9 @@ function getManifest() {
  * Build Less
  */
 function buildLess() {
-	return gulp.src('src/css/*.less').pipe(concat('markdown-editor.less')).pipe(less()).pipe(gulp.dest('dist/css/')).pipe(browserSync.stream());
+	return gulp.src('src/less/*.less').pipe(concat('markdown-editor.css')).pipe(less()).pipe(gulp.dest('.')).pipe(browserSync.stream());
 }
 
-
-/**
- * Copy static files
- */
-async function copyFiles() {
-	const statics = [
-		'lang',
-		'fonts',
-		'assets',
-		'templates',
-		'module.json',
-		'system.json',
-		'template.json',
-	];
-	try {
-		for (const file of statics) {
-			if (fs.existsSync(path.join('src', file))) {
-				await fs.copy(path.join('src', file), path.join('dist', file));
-			}
-		}
-		if (fs.existsSync('LICENSE'))
-			await fs.copy('LICENSE', path.join('dist', 'LICENSE'));
-		browserSync.reload();
-		return Promise.resolve();
-	} catch (err) {
-		Promise.reject(err);
-	}
-}
 
 /**
  * Watch for changes for each build step
@@ -103,7 +59,13 @@ function buildWatch() {
 		proxy: {
 			target: "localhost:30000",
 			ws: true
-		},
+    },
+    ghostMode: {
+      clicks: false,
+      scroll: false,
+      location: false,
+      forms: false
+    },
 		browser: 'google-chrome',
 		open: false
 	}
@@ -113,7 +75,7 @@ function buildWatch() {
 	gulp.watch(
 		['src/fonts', 'src/lang', 'src/templates', 'src/*.json', 'src/assets/**/*'],
 		{ ignoreInitial: false },
-		copyFiles
+		browserSync.reload
 	);
 	gulp.watch('src/scripts/**/*.js', buildWebpack);
 }
@@ -132,115 +94,6 @@ function buildWebpack() {
 		});
 	});
 }
-
-/********************/
-/*		CLEAN		*/
-/********************/
-
-/**
- * Remove built files from `dist` folder
- * while ignoring source files
- */
-async function clean() {
-	const name = path.basename(path.resolve('.'));
-	const files = [];
-
-	// If the project uses TypeScript
-	if (fs.existsSync(path.join('src', `${name}.ts`))) {
-		files.push(
-			'lang',
-			'templates',
-			'assets',
-			'module',
-			`${name}.js`,
-			'module.json',
-			'system.json',
-			'template.json'
-		);
-	}
-
-	// If the project uses Less or SASS
-	if (
-		fs.existsSync(path.join('src', `${name}.less`)) ||
-		fs.existsSync(path.join('src', `${name}.scss`))
-	) {
-		files.push('fonts', `${name}.css`);
-	}
-
-	console.log(' ', chalk.yellow('Files to clean:'));
-	console.log('   ', chalk.blueBright(files.join('\n    ')));
-
-	// Attempt to remove the files
-	try {
-		for (const filePath of files) {
-			await fs.remove(path.join('dist', filePath));
-		}
-		return Promise.resolve();
-	} catch (err) {
-		Promise.reject(err);
-	}
-}
-
-/********************/
-/*		LINK		*/
-/********************/
-
-/**
- * Link build to User Data folder
- */
-async function linkUserData() {
-	const name = path.basename(path.resolve('.'));
-	const config = fs.readJSONSync('foundryconfig.json');
-
-	let destDir;
-	try {
-		if (
-			fs.existsSync(path.resolve('.', 'dist', 'module.json')) ||
-			fs.existsSync(path.resolve('.', 'src', 'module.json'))
-		) {
-			destDir = 'modules';
-		} else if (
-			fs.existsSync(path.resolve('.', 'dist', 'system.json')) ||
-			fs.existsSync(path.resolve('.', 'src', 'system.json'))
-		) {
-			destDir = 'systems';
-		} else {
-			throw Error(
-				`Could not find ${chalk.blueBright(
-					'module.json'
-				)} or ${chalk.blueBright('system.json')}`
-			);
-		}
-
-		let linkDir;
-		if (config.dataPath) {
-			if (!fs.existsSync(path.join(config.dataPath, 'Data')))
-				throw Error('User Data path invalid, no Data directory found');
-
-			linkDir = path.join(config.dataPath, 'Data', destDir, name);
-		} else {
-			throw Error('No User Data path defined in foundryconfig.json');
-		}
-
-		if (argv.clean || argv.c) {
-			console.log(
-				chalk.yellow(`Removing build in ${chalk.blueBright(linkDir)}`)
-			);
-
-			await fs.remove(linkDir);
-		} else if (!fs.existsSync(linkDir)) {
-			console.log(
-				chalk.green(`Copying build to ${chalk.blueBright(linkDir)}`)
-			);
-			await fs.symlink(path.resolve('./dist'), linkDir);
-		}
-		return Promise.resolve();
-	} catch (err) {
-		Promise.reject(err);
-	}
-}
-
-
 /*********************/
 /*	update manifest  */
 /*********************/
@@ -250,7 +103,10 @@ async function linkUserData() {
  */
 function updateManifest(cb) {
 	const packageJson = fs.readJSONSync('package.json');
-	const config = getConfig(),
+	const config = {
+      repository: repoBaseUrl + moduleName,
+      rawURL: rawBaseUrl + moduleName
+    },
 		manifest = getManifest(),
 		rawURL = config.rawURL,
 		repoURL = config.repository,
@@ -325,11 +181,11 @@ function updateManifest(cb) {
 
 		/* Update URLs */
 
-		const downloadUrl = `${repoURL}/releases/download/v${manifest.file.version}/${manifest.file.name}.zip`;
+		const downloadUrl = `${repoURL}/releases/download/v${manifest.file.version}/v${manifest.file.version}.zip`;
 		// const result = `${rawURL}/v${manifest.file.version}/package/${manifest.file.name}-v${manifest.file.version}.zip`;
 
 		manifest.file.url = repoURL;
-		manifest.file.manifest = `${rawURL}/master/${manifestRoot}/${manifest.name}`;
+		manifest.file.manifest = `${rawURL}/master/${manifest.name}`;
 		manifest.file.download = downloadUrl;
 
 		const prettyProjectJson = stringify(manifest.file, {
@@ -376,15 +232,12 @@ function gitTag() {
 
 const execGit = gulp.series(gitAdd, gitCommit, gitTag);
 
-const execBuild = gulp.parallel(buildWebpack, buildLess, copyFiles);
+const execBuild = gulp.parallel(buildWebpack, buildLess);
 
-exports.build = gulp.series(clean, execBuild);
+exports.build = execBuild;
 exports.watch = buildWatch;
-exports.clean = clean;
-exports.link = linkUserData;
 exports.update = updateManifest;
 exports.publish = gulp.series(
-	clean,
 	updateManifest,
 	execBuild,
 	execGit
