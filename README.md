@@ -1,4 +1,4 @@
-# Meme - Moerills Efficacious Markdown Editor [BETA] <!-- omit in toc -->
+# Meme - Moerills Efficacious Markdown Editor <!-- omit in toc -->
 <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/moerill/fvtt-markdown-editor?style=flat-square"> <img alt="GitHub" src="https://img.shields.io/github/license/moerill/fvtt-markdown-editor?style=flat-square"> <img alt="GitHub Releases" src="https://img.shields.io/github/downloads/moerill/fvtt-markdown-editor/latest/total?style=flat-square">  [![PayPal](https://img.shields.io/badge/Donate-PayPal-blue?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FYZ294SP2JBGS&source=url)
 
 This is a drop in replacement for FVTTs default rich text editor (TinyMCE).  
@@ -7,46 +7,33 @@ While switching between the original editor and this one does not result in bugs
 * Markdown written through the markdown editor will not be parsed to the correct HTML output, when switching back to the default editor, TinyMCE. But it will not cause problems.
 
 - [Important Information!](#important-information)
-	- [Beta Version](#beta-version)
-	- [Style problems? System/sheet/.. not supported?](#style-problems-systemsheet-not-supported)
-	- [Bug Reporting](#bug-reporting)
-	- [Atribution](#atribution)
-	- [Licensing](#licensing)
-	- [Support the development](#support-the-development)
+  - [Style problems? System/sheet/.. not supported?](#style-problems-systemsheet-not-supported)
+  - [Issues/Suggestions?](#issuessuggestions)
+  - [Atribution](#atribution)
+  - [Licensing](#licensing)
+  - [Support the development](#support-the-development)
 - [Features](#features)
-	- [Enhanced Markdown Syntax](#enhanced-markdown-syntax)
-	- [Keyboard shortcuts](#keyboard-shortcuts)
-	- [Entity Link Autocompletion](#entity-link-autocompletion)
-	- [VIM Keybindings](#vim-keybindings)
-	- [Chat](#chat)
+  - [Enhanced Markdown Syntax](#enhanced-markdown-syntax)
+  - [Keyboard shortcuts](#keyboard-shortcuts)
+  - [Entity autocompletion](#entity-autocompletion)
+  - [VIM Keybindings](#vim-keybindings)
+  - [Chat](#chat)
 
 # Important Information!
-## Beta Version
-This module is Beta. I do feel quite confident that it does work and doesn't break stuff, but please still be careful.  
-*Also this means: I'm in big need of feedback! Tell me what is awesome, what doesn't work and/or what you'd like to improve upon!*
 
 ## Style problems? System/sheet/.. not supported?
 If your system/sheet/... has some styling issues with this editor, please contact me aboutb it and **ideally** send me the css to fix it! I'll be happy to incorporate it. But i can't check every module or system myself, there are to many.
 
-## Bug Reporting
-Go to the [GitHub's issue board](https://github.com/Moerill/fvtt-markdown-editor/issues) and check if the Bug is already reported. If not first test with all other modules disabled! If the bug persists create a new issue, with at least the following information:
-1. Module version
-2. FVTT version
-3. Browser and OS used. Or if the app itself is used.
-4. Bug description
-	- What happened?
-	- What should've happened?
-	- Console errors? (F12 or F11 in most browsers)
-5. Workflow to recreate the bug
-6. Helpful videos or screenshots if possible
-7. Either activate notifications, stay active or post your discord handle so i can get back to you for further questions  
+## Issues/Suggestions?
+Go to the [GitHub's issue board](https://github.com/Moerill/fvtt-markdown-editor/issues) create an issue, select the correct template and follow its guidelines.
 
 **I will only take a quick glance at half hearted bug reports or Discord mentions! Don't expect me to react there!**
 
 ## Atribution
-This module uses and partially modifies the following libraries:
+This module uses the following libraries:
 * [EasyMDE](https://github.com/Ionaru/easy-markdown-editor)
-* [Marked](https://github.com/markedjs/marked)  
+* [Markdown-it](https://github.com/markdown-it/markdown-it)  
+  * [markdown-it-container plugin](https://github.com/markdown-it/markdown-it-container)
 * [Codemirror](https://codemirror.net/)
   
 Thanks to @NickEast for his ![foundry project creator](https://gitlab.com/foundry-projects/foundry-pc/create-foundry-project) which i'm using in a modified version for my building and publishing workflow.
@@ -54,7 +41,7 @@ Thanks to @NickEast for his ![foundry project creator](https://gitlab.com/foundr
 This module would not be possible without the great work from Atropos on FoundryVTT and the [DnD5e System](https://gitlab.com/foundrynet/dnd5e) for FoundryVTT! Part of the code (especially the code for the rolls) is heavily based on the DnD5es code, which is licensed under GNU GPLv3.
 
 ## Licensing
-This module currently is not licensed itself.
+<img alt="GitHub" src="https://img.shields.io/github/license/moerill/fvtt-markdown-editor?style=flat">
 
 This work is licensed under Foundry Virtual Tabletop [EULA - Limited License Agreement for module development](https://foundryvtt.com/article/license/).
 
@@ -92,14 +79,15 @@ Shortcut (Windows / Linux) | Shortcut (macOS) | Action
 *F9* | *F9* | toggle side by side view
 *F11* | *F11* | toggle full screen view
 
-## Entity Link Autocompletion
-![autocomplete preview](img/markdown-autocomplete.gif)
-Autocompletes your Entity links and replacing the name using the ID. Just write an ``@`` and it will the entity type. When the entity type was chosen it will supply a list of all world entities of that type.  
-Compendia are currently not supported, but will come with a future update.  
+## Entity autocompletion
+
+This feature is not supported per default anymore, since there exists a module which does this way better:  
+@SunSpots awesome [Quick Insert](https://gitlab.com/fvtt-modules-lab/quick-insert/).  
+I've integrated it to fit neatly into all MEME instances!
 
 ## VIM Keybindings
 You can enable VIM Keybindings for the editor, inside FVTTs Settings menu. This setting is user specific.
 
 ## Chat
-The chat input form does support markdown as well.  
+The chat input form does support markdown as well. (You can toggle this feature in the settings)  
 To recall last send messages use *Page-Up/-Down* to cycle through your old messages.

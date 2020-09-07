@@ -1,29 +1,28 @@
 const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-  name: 'mess',
+  name: 'markdown-editor',
   entry: {
     index: path.resolve(__dirname, 'src/scripts/index.js')
   },
   mode: 'development',
   devtool: 'source-map',
   output: {
-    publicPath: 'modules/mess/scripts/',
+    publicPath: 'modules/markdown-editor/scripts/',
     filename: 'index.js',
     chunkFilename: 'bundles/[name].[chunkhash:4].js',
-    path: path.resolve(__dirname, 'dist/scripts/'),
+    path: path.resolve(__dirname),
   },
   optimization: {
     minimize: true
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new webpack.IgnorePlugin(/scripts\/greensock/),
+    new webpack.IgnorePlugin(/modules\//),
     new webpack.BannerPlugin({banner: `# License information
 
-    This work uses the following libraries with their licenses attached, partially modified to add some FoundryVTT related functionality.
+    This work uses the following libraries with their licenses attached.
     
     # [EasyMDE](https://github.com/Ionaru/easy-markdown-editor)
     
@@ -51,17 +50,32 @@ module.exports = {
     SOFTWARE.
     © 2020 GitHub, Inc.
     
-    # [Marked](https://github.com/markedjs/marked)  
+    # [Markdown-It](https://github.com/markdown-it/markdown-it)  
     
     ## The MIT License (MIT)
     
-    Copyright (c) 2011-2018, Christopher Jeffrey (https://github.com/chjj/)
-    
-    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-    
-    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-    
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  
+    Copyright (c) 2014 Vitaly Puzrin, Alex Kocharin.
+
+    Permission is hereby granted, free of charge, to any person
+    obtaining a copy of this software and associated documentation
+    files (the "Software"), to deal in the Software without
+    restriction, including without limitation the rights to use,
+    copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following
+    conditions:
+
+    The above copyright notice and this permission notice shall be
+    included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+    OTHER DEALINGS IN THE SOFTWARE.
     
     # [Codemirror](https://codemirror.net/)
     
@@ -87,6 +101,33 @@ module.exports = {
     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-    THE SOFTWARE.`})
+    THE SOFTWARE.
+    
+    # [markdown-it-container](https://github.com/markdown-it/markdown-it-container)
+    
+    ## The MIT License (MIT)
+    
+    Copyright (c) 2015 Vitaly Puzrin, Alex Kocharin.
+
+    Permission is hereby granted, free of charge, to any person
+    obtaining a copy of this software and associated documentation
+    files (the "Software"), to deal in the Software without
+    restriction, including without limitation the rights to use,
+    copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following
+    conditions:
+
+    The above copyright notice and this permission notice shall be
+    included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+    OTHER DEALINGS IN THE SOFTWARE.`})
   ]
 };
