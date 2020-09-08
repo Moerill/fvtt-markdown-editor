@@ -66,13 +66,11 @@ export class MemeSettings extends FormApplication {
 
   static get isRichTextActive() {
     const settings = game.settings.get('markdown-editor', 'world-settings');
-    console.log(settings);
     return settings.richText;
   }
 
   static get isChatActive() {
     const settings = game.settings.get('markdown-editor', 'world-settings');
-    console.log(settings);
     return settings.chat;    
   }
 

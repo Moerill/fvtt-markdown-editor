@@ -10,7 +10,7 @@ export class MemePluginsManager {
 
     for (let key in plugins) {
       if (!plugins[key].init())
-        plugins[key] = null;
+        delete plugins[key];
     }
   }
 

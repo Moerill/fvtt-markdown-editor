@@ -1,3 +1,7 @@
+# v0.4.1
+
+- Fixed small issue with the plugin manager not breaking everything if quick insert is not installed/activated.
+
 # v0.4.0
 
 In my opinion this module is now feature complete and is now officially released!  
