@@ -2,7 +2,10 @@ import EasyMDE from 'easymde';
 
 import {MemePluginsManager} from './plugins/plugin-manager.js';
 
-const md = require('markdown-it')();
+const md = require('markdown-it')({
+  html: true,
+  linkify: true
+});
 require('codemirror/keymap/vim.js')
 
 md.use(require('markdown-it-container'), 'secret', {

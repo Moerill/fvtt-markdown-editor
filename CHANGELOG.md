@@ -1,3 +1,7 @@
+# v0.4.2
+
+- Fix HTML not parsing
+
 # v0.4.1
 
 - Fixed small issue with the plugin manager not breaking everything if quick insert is not installed/activated.
