@@ -1,16 +1,20 @@
-import { Meme, ChatMeme } from './mmde.js';
+import { Meme, ChatMeme, markdownIt } from './mmde.js';
 
-import { MemePluginsManager } from './plugins/plugin-manager.js';
+import { QuickInsertPlugin } from './plugins/quick-insert.js';
 
 import { MemeSettings } from './settings.js';
 
+window.MEME = {
+  ChatMeme,
+  markdownIt,
+  BaseMeme: Meme
+}
 
 // Hooks.on('ready', () => game.journal.get('Gb3Z2SCBSDp1sEVe').sheet.render(true))
 
 Hooks.on('init', function() {
 	MemeSettings.init();
-  MemePluginsManager.init();
-
+  QuickInsertPlugin.init();
   if (MemeSettings.isRichTextActive)
     activateRichTextFeatures();
 
@@ -20,7 +24,10 @@ Hooks.on('init', function() {
       let editorOptions = {
         element: chat
       }
-      app.editor = new ChatMeme(editorOptions);
+
+    // Use this hook to modify e.g. the toolbar content or other options for invoking the editor
+      Hooks.callAll('MemeActivateChat', editorOptions)
+      app.editor = new MEME.ChatMeme(editorOptions);
     });
 });
 
@@ -62,13 +69,17 @@ function activateRichTextFeatures() {
 		textarea.innerHTML = content;
 		const editable = !!textarea.dataset.editable;
 		let editorOptions = {
-			element: textarea,
+      element: textarea,
+      parent: this,
       owner: !!div.dataset.owner,
       saveCallback: (content) => this._onEditorSave(target, textarea, content)
     }
     
+    // Use this hook to modify e.g. the toolbar content or other options for invoking the editor
+    Hooks.callAll('MemeActivateEditor', this, editorOptions)
+
 		if (!editable) editorOptions.toolbar = false;
-		this.editors[target] = new Meme(editorOptions);
+		this.editors[target] = new MEME.BaseMeme(editorOptions);
 
 		if (!editable) {
       this.editors[target].makePreviewOnly();
@@ -95,9 +106,7 @@ function activateRichTextFeatures() {
   }
   
   FormApplication.prototype._onEditorSave = function(target, element, content) {
-    const formData = validateForm(this.form);
     let event = new Event("memesave");
-    // Update the form object
-    return this._updateObject(event, formData);
+    return this._onSubmit(event);
   }
 }

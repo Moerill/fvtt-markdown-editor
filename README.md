@@ -1,4 +1,4 @@
-# Meme - Moerills Efficacious Markdown Editor <!-- omit in toc -->
+# Meme - Moerills Expandable Markdown Editor <!-- omit in toc -->
 <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/moerill/fvtt-markdown-editor?style=flat-square"> <img alt="GitHub" src="https://img.shields.io/github/license/moerill/fvtt-markdown-editor?style=flat-square"> <img alt="GitHub Releases" src="https://img.shields.io/github/downloads/moerill/fvtt-markdown-editor/latest/total?style=flat-square">  [![PayPal](https://img.shields.io/badge/Donate-PayPal-blue?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FYZ294SP2JBGS&source=url)
 
 This is a drop in replacement for FVTTs default rich text editor (TinyMCE).  
@@ -18,6 +18,8 @@ While switching between the original editor and this one does not result in bugs
   - [Entity autocompletion](#entity-autocompletion)
   - [VIM Keybindings](#vim-keybindings)
   - [Chat](#chat)
+- [Extend or use Meme in your project](#extend-or-use-meme-in-your-project)
+  - [Available hooks](#available-hooks)
 
 # Important Information!
 
@@ -91,3 +93,19 @@ You can enable VIM Keybindings for the editor, inside FVTTs Settings menu. This 
 ## Chat
 The chat input form does support markdown as well. (You can toggle this feature in the settings)  
 To recall last send messages use *Page-Up/-Down* to cycle through your old messages.
+
+# Extend or use Meme in your project
+
+You can use use Meme in your own module, extend or modify it to your liking using your own module.  
+The ``MEME`` window object has the following properties:
+
+- ``BaseMeme`` - the base editor class used.
+- ``ChatMeme`` - the class used for the chat.
+- ``markdownIt`` - the markdown parser and renderer used.
+
+## Available hooks
+
+
+- ``MemeRenderEditor(editor, parent)`` - modify the editor after its already been rendered (for both chat and base meme)
+- ``MemeActivateEditor(options)`` - modify the editors options before its invoked
+- ``MemeActivateChat(options)`` - modify the chat editors options before its invoked

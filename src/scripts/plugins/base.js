@@ -1,5 +1,5 @@
 export class PluginBase {
-  /** Call on init hook 
+  /** 
    * @returns {Boolean} if initialization was successful
   **/
   static init() { return false; }

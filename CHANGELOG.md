@@ -1,3 +1,15 @@
+# v0.5
+
+- renamed module to ``MEME - Moerills expandable markdown editor``
+- Added the markdown parser, and both Editor classes to the ``MEME`` window object, so other modules can invoke the editor themself. (To my knowledge webpack sadly doesn't allow for esm6 module export bundling..)
+- removed PluginManager in favor of more hooks for more  flexibility
+- all available Hooks:
+  - ``MemeRenderEditor(editor, parent)`` - modify the editor after its already been rendered (for both chat and base meme)
+  - ``MemeActivateEditor(options)`` - modify the editors options before its invoked
+  - ``MemeActivateChat(options)`` - modify the chat editors options before its invoked
+- script is now loaded as "script", cause webpack can't even export esm6 modules, to my knowledge...
+- fixed error when saving editor.
+
 # v0.4.2
 
 - Fix HTML not parsing

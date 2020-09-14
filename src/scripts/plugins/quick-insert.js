@@ -11,7 +11,7 @@ export class QuickInsertPlugin extends PluginBase {
     const module = game.modules.get('quick-insert');
     if (!module || !module.active) return false;
     dependenciesLoaded = this.loadDependencies();
-
+    Hooks.on('MemeRenderEditor', QuickInsertPlugin.onRender);
     return true;
   }
 
@@ -32,7 +32,7 @@ export class QuickInsertPlugin extends PluginBase {
         if (!window.Azzu.SettingsTypes.KeyBinding.eventIsForBinding(ev, key)) return;
         ev.stopPropagation();
         const context = new SearchContext();
-        context.spawnCSS = this.spawnCSS(cm);
+        context.spawnCSS = QuickInsertPlugin.spawnCSS(cm);
         context.onSubmit = (item) => {
           cm.replaceSelection(item.journalLink);
           cm.focus();

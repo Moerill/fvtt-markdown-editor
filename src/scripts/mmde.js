@@ -1,11 +1,10 @@
 import EasyMDE from 'easymde';
 
-import {MemePluginsManager} from './plugins/plugin-manager.js';
-
 const md = require('markdown-it')({
   html: true,
   linkify: true
 });
+export const markdownIt = md;
 require('codemirror/keymap/vim.js')
 
 md.use(require('markdown-it-container'), 'secret', {
@@ -162,42 +161,44 @@ export class Meme extends EasyMDE {
   render() {
     super.render();
 
-    this.codemirror.on('drop', (inst, ev) => {
-			let data;
-			try {	// catch stuff that is not correctly formatted.. like  accidently dropping "just plain text drags"
-				data = JSON.parse(event.dataTransfer.getData('text/plain'));
-			} catch (e) {
-				return;
-			}
-			if ( !data ) return;
-			ev.preventDefault();
-			const insertIntoEditor = function(link) {
-        const pos = inst.coordsChar({left: ev.clientX, top: ev.clientY});
-        inst.setCursor(pos);
-        inst.replaceSelection(link);
-        inst.focus();
-			}
-			try {
-				if (data.pack) {
-					const pack = game.packs.get(data.pack);
-					pack.getEntity(data.id).then(entity => 
-						insertIntoEditor(`@Compendium[${data.pack}.${data.id}]{${entity.name}}`));
-				} else {
-					const entity = CONFIG[data.type].collection.instance.get(data.id);
-					insertIntoEditor(`@${data.type}[${entity._id}]{${entity.name}}`);
-				}
-					
-			} catch(e) {
-				console.error("Dropped incorrect data!", data);
-			}
-    });
+    this.codemirror.on('drop', this._onDrop);
     
     if (game.settings.get('markdown-editor', 'vim-mode')) {
       delete this.codemirror.options.extraKeys['Esc'];
       this.codemirror.setOption('vimMode', true);
     }
 
-    MemePluginsManager.onRender(this);
+    Hooks.callAll('MemeRenderEditor', this, this.options.parent);
+  }
+
+  _onDrop(inst, ev) {
+    let data;
+    try {	// catch stuff that is not correctly formatted.. like  accidently dropping "just plain text drags"
+      data = JSON.parse(event.dataTransfer.getData('text/plain'));
+    } catch (e) {
+      return;
+    }
+    if ( !data ) return;
+    ev.preventDefault();
+    const insertIntoEditor = function(link) {
+      const pos = inst.coordsChar({left: ev.clientX, top: ev.clientY});
+      inst.setCursor(pos);
+      inst.replaceSelection(link);
+      inst.focus();
+    }
+    try {
+      if (data.pack) {
+        const pack = game.packs.get(data.pack);
+        pack.getEntity(data.id).then(entity => 
+          insertIntoEditor(`@Compendium[${data.pack}.${data.id}]{${entity.name}}`));
+      } else {
+        const entity = CONFIG[data.type].collection.instance.get(data.id);
+        insertIntoEditor(`@${data.type}[${entity._id}]{${entity.name}}`);
+      }
+        
+    } catch(e) {
+      console.error("Dropped incorrect data!", data);
+    }
   }
 
   markdown(text) {
@@ -220,39 +221,15 @@ export class ChatMeme extends Meme {
     super.render();
 
     // remove enter to new line
-    this.codemirror.options.extraKeys['Enter'] = () => {
-      const editor = this;
-      const textarea = editor.element;
-      if (!editor.value()) return;
-      let message = editor.value();
-      // if rollcommand, leave it be
-      let [command, match] = ui.chat.constructor.parse(message);
-      // on whisper, move the whisper target outside of the parsed tetx
-      if (command === "whisper") {
-        message = match[1]+match[2]+ ' ' + this.markdown(match[3]).replace(/\n/g, '')
-        // similar for ooc, iic, emote
-      } else if (["ic", "ooc", "emote"].includes(command)){
-        message = match[1]+ ' ' + this.markdown(match[2]).replace(/\n/g, '')
-      } else if (command === "none")
-        message = this.markdown(message).replace(/\n/g, '');
-  
-      // Prepare chat message data and handle result
-      ui.chat.processMessage(message).then(() => {
-        ui.chat._remember(editor.value());
-        textarea.value = "";
-        editor.value('');
-      }).catch(error => {
-        ui.notifications.error(error);
-        throw error;
-      });
-    };
+    this.codemirror.options.extraKeys['Enter'] = this._sendChatMessage.bind(this);
 
-    this.codemirror.options.extraKeys['PageDown'] = this.chatRecallMessageDown.bind(this);
-    this.codemirror.options.extraKeys['PageUp'] = this.chatRecallMessageUp.bind(this);
+    this.codemirror.options.extraKeys['PageDown'] = this._chatRecallMessageDown.bind(this);
+    this.codemirror.options.extraKeys['PageUp'] = this._chatRecallMessageUp.bind(this);
 
     // Emojule integration without plugin manager.. cause easier this way
     Hooks.on('emojuleSelectEmoji', emojiCode => {
       const word = this.codemirror.findWordAt(this.codemirror.getCursor());
+      console.log(word);
       this.codemirror.replaceRange(emojiCode.substring(1), word.anchor, word.head)
       return false;
     });
@@ -267,12 +244,42 @@ export class ChatMeme extends Meme {
     return md.render(text);
   }
 
-  chatRecallMessageUp() {
+  /**
+   * Sends the content of the textarea to chat.
+   */
+  _sendChatMessage() {
+    const editor = this;
+    const textarea = editor.element;
+    if (!editor.value()) return;
+    let message = editor.value();
+    // if rollcommand, leave it be
+    let [command, match] = ui.chat.constructor.parse(message);
+    // on whisper, move the whisper target outside of the parsed tetx
+    if (command === "whisper") {
+      message = match[1]+match[2]+ ' ' + this.markdown(match[3]).replace(/\n/g, '')
+      // similar for ooc, iic, emote
+    } else if (["ic", "ooc", "emote"].includes(command)){
+      message = match[1]+ ' ' + this.markdown(match[2]).replace(/\n/g, '')
+    } else if (command === "none")
+      message = this.markdown(message).replace(/\n/g, '');
+
+    // Prepare chat message data and handle result
+    ui.chat.processMessage(message).then(() => {
+      ui.chat._remember(editor.value());
+      textarea.value = "";
+      editor.value('');
+    }).catch(error => {
+      ui.notifications.error(error);
+      throw error;
+    });
+  }
+
+  _chatRecallMessageUp() {
     this.value(ui.chat._recall(1));
   }
 
 
-  chatRecallMessageDown() {
+  _chatRecallMessageDown() {
     this.value(ui.chat._recall(-1));
   }
 }
