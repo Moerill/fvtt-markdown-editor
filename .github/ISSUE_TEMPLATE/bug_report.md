@@ -7,11 +7,14 @@ assignees: ''
 
 ---
 
+**Using the template**  
+Choose a fitting  title to your issue.  
+Please go through each section, adding as much detailed information as possible and remove the default text. If a section is completly irrelevant for some reason, delete it completly.  
+Also ideally be somewhat responsive in this issues thread so you can answer possible questions i have.
+
 **Describe the bug**
 A clear and concise description of what the bug is.  
-
-**Console Errors**
-Are there any errors in console? If yes, do post them here, if no, please state so.
+Also post console errors (F12 for most browsers) here that occur.
 
 **To Reproduce**
 Steps to reproduce the behavior:
@@ -23,10 +26,9 @@ Steps to reproduce the behavior:
 **Expected behavior**
 A clear and concise description of what you expected to happen.
 
-**Other Modules**
+**Module incompatibilities**
 Please try to reproduce your bug with all other modules deactivated. If this module clashes with another module, please find that module and report it here.  
-The [find the culprit](https://github.com/Moerill/fvtt-find-the-culprit/) module may prove to be useful here.  
-Please state your result here.
+The [find the culprit](https://github.com/Moerill/fvtt-find-the-culprit/) module may prove to be useful here.
 
 **Screenshots/GIFs/Videos**
 If applicable, add screenshots to help explain your problem.

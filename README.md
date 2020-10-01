@@ -8,7 +8,7 @@ While switching between the original editor and this one does not result in bugs
 
 - [Important Information!](#important-information)
   - [Style problems? System/sheet/.. not supported?](#style-problems-systemsheet-not-supported)
-  - [Issues/Suggestions?](#issuessuggestions)
+  - [Bug Reporting and Feature Suggestions](#bug-reporting-and-feature-suggestions)
   - [Atribution](#atribution)
   - [Licensing](#licensing)
   - [Support the development](#support-the-development)
@@ -26,10 +26,11 @@ While switching between the original editor and this one does not result in bugs
 ## Style problems? System/sheet/.. not supported?
 If your system/sheet/... has some styling issues with this editor, please contact me aboutb it and **ideally** send me the css to fix it! I'll be happy to incorporate it. But i can't check every module or system myself, there are to many.
 
-## Issues/Suggestions?
-Go to the [GitHub's issue board](https://github.com/Moerill/fvtt-markdown-editor/issues) create an issue, select the correct template and follow its guidelines.
+## Bug Reporting and Feature Suggestions
+Go to the [GitHub's issue board](https://github.com/Moerill/fvtt-markdown-editor/issues) and create an issue with the template fitting to what you want to post and follow its instructions.
 
-**I will only take a quick glance at half hearted bug reports or Discord mentions! Don't expect me to react there!**
+**I will ignore half-hearted bug reports ignoring the issue template or Discord mentions!**  
+Its not difficult to put at least some effort into something that you want someone else to put their spare time into to fix!  
 
 ## Atribution
 This module uses the following libraries:

@@ -19,6 +19,8 @@ export class QuickInsertPlugin extends PluginBase {
     const dep = await import(/* webpackIgnore: true */ '/modules/quick-insert/quick-insert.js');
     QuickInsert = dep.QuickInsert;
     SearchContext = dep.SearchContext
+
+    console.log('MEME | finished loading quick insert dependencies.');
     return dep;
   };
 
