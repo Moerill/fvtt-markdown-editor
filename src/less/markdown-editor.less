@@ -19,6 +19,21 @@
 	&:before, &:after {
 		margin: 1px;
 	}
+
+  .easymde-dropdown{
+      background: linear-gradient(to bottom right,#000 0,#000 84%,#ccc 50%,#ccc 100%);
+      // border: 1px solid #666;
+      border: none;
+  }
+
+  button {
+      color: #fff;
+      mix-blend-mode: difference;
+
+      &.active {
+          background-color: #aaa5;
+      }
+  }
 	
 	&.fullscreen {
 		filter: brightness(0.8);
@@ -94,6 +109,13 @@
 		position: relative;
 		top: -2em;
 	}
+}
+
+.easymde-dropdown-content {
+    > button {
+        white-space: nowrap;
+        width: auto;
+    }
 }
 
 /** 

@@ -21,6 +21,17 @@
 .editor-toolbar:after {
   margin: 1px;
 }
+.editor-toolbar .easymde-dropdown {
+  background: linear-gradient(to bottom right, #000 0, #000 84%, #ccc 50%, #ccc 100%);
+  border: none;
+}
+.editor-toolbar button {
+  color: #fff;
+  mix-blend-mode: difference;
+}
+.editor-toolbar button.active {
+  background-color: #aaa5;
+}
 .editor-toolbar.fullscreen {
   filter: brightness(0.8);
   box-shadow: 0 0 10px inset rgba(0, 0, 0, 0.5);
@@ -73,6 +84,10 @@
   position: relative;
   top: -2em;
 }
+.easymde-dropdown-content > button {
+  white-space: nowrap;
+  width: auto;
+}
 /** 
 * Design changes for specific systems
 */
@@ -106,6 +121,9 @@
   color: #333;
   padding: 0;
 }
+.chat-message .inline-roll .dice-tooltip {
+  z-index: 1;
+}
 .dark-mode .editor .CodeMirror-selected {
   background: #aaa3;
 }
@@ -115,15 +133,8 @@
 .dark-mode .CodeMirror-fullscreen .editor-toolbar {
   background: url(../../dnd5e-dark-mode/ui/parchment_dark.jpg) repeat;
 }
-.dark-mode .editor-toolbar {
-  border: 1px solid #ccc3;
-}
 .dark-mode .editor-toolbar .active {
-  color: #3f88e6;
   background: none;
-}
-.dark-mode .editor-toolbar i.separator {
-  border-left: 1px solid #ccca;
 }
 .dark-mode .CodeMirror .CodeMirror-cursor {
   border-left: 1px solid #ccc;
@@ -154,9 +165,6 @@
 }
 .tidy5e .CodeMirror-scroll {
   padding-bottom: 0;
-}
-.dnd5e.sheet.item .editor-toolbar button {
-  color: inherit;
 }
 .dnd5e.sheet.item .tab.flexrow {
   flex-wrap: nowrap;

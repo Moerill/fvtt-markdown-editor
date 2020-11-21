@@ -7,19 +7,19 @@ While switching between the original editor and this one does not result in bugs
 * Markdown written through the markdown editor will not be parsed to the correct HTML output, when switching back to the default editor, TinyMCE. But it will not cause problems.
 
 - [Important Information!](#important-information)
-  - [Style problems? System/sheet/.. not supported?](#style-problems-systemsheet-not-supported)
-  - [Bug Reporting and Feature Suggestions](#bug-reporting-and-feature-suggestions)
-  - [Atribution](#atribution)
-  - [Licensing](#licensing)
-  - [Support the development](#support-the-development)
+	- [Style problems? System/sheet/.. not supported?](#style-problems-systemsheet-not-supported)
+	- [Bug Reporting and Feature Suggestions](#bug-reporting-and-feature-suggestions)
+	- [Atribution](#atribution)
+	- [Licensing](#licensing)
+	- [Support the development](#support-the-development)
 - [Features](#features)
-  - [Enhanced Markdown Syntax](#enhanced-markdown-syntax)
-  - [Keyboard shortcuts](#keyboard-shortcuts)
-  - [Entity autocompletion](#entity-autocompletion)
-  - [VIM Keybindings](#vim-keybindings)
-  - [Chat](#chat)
+	- [Enhanced Markdown Syntax](#enhanced-markdown-syntax)
+	- [Keyboard shortcuts](#keyboard-shortcuts)
+	- [Entity autocompletion](#entity-autocompletion)
+	- [VIM Keybindings](#vim-keybindings)
+	- [Chat](#chat)
 - [Extend or use Meme in your project](#extend-or-use-meme-in-your-project)
-  - [Available hooks](#available-hooks)
+	- [Available hooks](#available-hooks)
 
 # Important Information!
 

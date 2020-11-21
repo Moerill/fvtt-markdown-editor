@@ -1,3 +1,7 @@
+# v0.6
+
+- updated EasyMDE and markdownIt versions used to the latest ones.
+
 # v0.5
 
 - renamed module to ``MEME - Moerills expandable markdown editor``
