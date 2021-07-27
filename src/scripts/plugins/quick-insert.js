@@ -28,10 +28,7 @@ export class QuickInsertPlugin extends PluginBase {
     // work with the promise to make sure the code is only executed when everything is loaded.
     dependenciesLoaded.then(() => {
       editor.codemirror.on('keydown', (cm, ev) => {
-        const key = window.Azzu.SettingsTypes.KeyBinding.parse(
-            game.settings.get('quick-insert', 'quickOpen')
-          );
-        if (!window.Azzu.SettingsTypes.KeyBinding.eventIsForBinding(ev, key)) return;
+        if (!QuickInsert.matchBoundKeyEvent(key)) return;
         ev.stopPropagation();
         const context = new SearchContext();
         context.spawnCSS = QuickInsertPlugin.spawnCSS(cm);
