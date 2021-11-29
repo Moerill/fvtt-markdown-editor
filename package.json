@@ -30,5 +30,8 @@
 		"turndown": "^7.0.0",
 		"webpack": "^5.4.0",
 		"yargs": "^16.1.0"
+	},
+	"dependencies": {
+		"markdown-it-footnote": "^3.0.3"
 	}
 }

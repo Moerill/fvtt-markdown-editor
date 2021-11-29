@@ -91,8 +91,32 @@ List of extra markdown Syntax
      [ ] - unchecked
 	 [x] - checked
   ```
-  Altering the checked state is not yet persisted outside of edit mode.
-  
+  **NOTE:** Altering the checked state is not yet persisted outside of edit mode.
+
+* ***OPTIONAL***: Use markdown-it-deflist syntax to create <DL> lists, like:
+  ```
+    Definition term
+	: First definition
+	: Second definition
+  ```
+
+* ***OPTIONAL***: Use markdown-it-footnote syntax, like:
+   ```
+   Here is a footnote reference,[^1] and another.[^longnote]
+
+  [^1]: Here is the footnote.
+
+  [^longnote]: Here's one with multiple blocks.
+
+    Subsequent paragraphs are indented to show that they belong to the previous footnote.
+
+	Here is an inline note.^[Inline notes are easier to write, since you don't have to pick an identifier and move down to type the note.]
+  ```
+  **NOTE**: Internal links don't yet work.
+
+
+* ***OPTIONAL***: Use markdown-it's typographer support. This swaps in smart quotes and similar.
+
 ## Keyboard shortcuts
 
 Shortcut (Windows / Linux) | Shortcut (macOS) | Action

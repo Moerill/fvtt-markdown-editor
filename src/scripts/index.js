@@ -39,6 +39,12 @@ Hooks.on('init', function () {
 	if (MemeSettings.isMarkdownItDeflistActive) {
 		activateMarkdownItDeflist();
 	}
+	if (MemeSettings.isMarkdownItFootnoteActive) {
+		activateMarkdownItFootnote();
+	}
+	if (MemeSettings.isMarkdownItTypographerActive) {
+		activateMarkdownItTypographer();
+	}
 });
 
 function activateRichTextFeatures() {
@@ -156,4 +162,14 @@ function activateMarkdownItDeflist() {
 	const markdownItDeflist = require('markdown-it-deflist');
 
 	markdownIt.use(markdownItDeflist);
+}
+
+function activateMarkdownItFootnote() {
+	const markdownItFootnote = require('markdown-it-footnote');
+
+	markdownIt.use(markdownItFootnote);
+}
+
+function activateMarkdownItTypographer() {
+	markdownIt.options.typographer = true;
 }

@@ -332,6 +332,8 @@
 
 /*! CommonJS bailout: module.exports is used directly at 6:0-14 */
 
+/*! CommonJS bailout: module.exports is used directly at 77:0-14 */
+
 /*! CommonJS bailout: module.exports is used directly at 7:0-14 */
 
 /*! CommonJS bailout: module.exports is used directly at 89:0-14 */
@@ -8994,6 +8996,8 @@
 
 /*! markdown-it-deflist */
 
+/*! markdown-it-footnote */
+
 /*! marked/lib/marked */
 
 /*! mdurl */
@@ -9168,6 +9172,10 @@
 
 /*!****************************************************!*\
   !*** ./node_modules/markdown-it-checkbox/index.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/markdown-it-footnote/index.js ***!
   \****************************************************/
 
 /*!*****************************************************!*\

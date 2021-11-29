@@ -16,7 +16,9 @@ export class MemeSettings extends FormApplication {
         richText: true,
         markdownItContainer: true,
         markdownItCheckbox: false,
-        markdownItDeflist: false
+        markdownItDeflist: false,
+        markdownItFootnote: false,
+        markdownItTypographer: false
       },
       config: false,
       onChange: () => {
@@ -90,6 +92,16 @@ export class MemeSettings extends FormApplication {
   static get isMarkdownItDeflistActive() {
     const settings = game.settings.get('markdown-editor', 'world-settings');
     return settings.markdownItDeflist;
+  }
+
+  static get isMarkdownItFootnoteActive() {
+    const settings = game.settings.get('markdown-editor', 'world-settings');
+    return settings.markdownItFootnote;
+  }
+
+  static get isMarkdownItTypographerActive() {
+    const settings = game.settings.get('markdown-editor', 'world-settings');
+    return settings.markdownItTypographer;
   }
 
   constructor(object = {}, options) {
