@@ -31,25 +31,11 @@ Hooks.on('init', function () {
 	if (MemeSettings.isMarkdownItContainerActive) {
 		activateMarkdownItContainer();
 	}
+
+	if (MemeSettings.isMarkdownItCheckboxActive) {
+		activateMarkdownItCheckbox();
+	}
 });
-
-function activateMarkdownItContainer() {
-	markdownIt.use(markdownItContainer, "any", {
-		validate: function (params) {
-			return true;
-		},
-		render: function (tokens, idx, options, _env, self) {
-			const m = tokens[idx].info.trim().match(/^(.*)$/);
-
-			if (tokens[idx].nesting === 1) {
-				tokens[idx].attrPush(["class", m[1]]);
-			}
-
-			return self.renderToken(tokens, idx, options);
-		},
-	});
-
-}
 
 function activateRichTextFeatures() {
 	Handlebars.unregisterHelper('editor');
@@ -136,4 +122,28 @@ function activateRichTextFeatures() {
 		let event = new Event('memesave');
 		return this._onSubmit(event);
 	};
+}
+
+function activateMarkdownItContainer() {
+	markdownIt.use(markdownItContainer, "any", {
+		validate: function (params) {
+			return true;
+		},
+		render: function (tokens, idx, options, _env, self) {
+			const m = tokens[idx].info.trim().match(/^(.*)$/);
+
+			if (tokens[idx].nesting === 1) {
+				tokens[idx].attrPush(["class", m[1]]);
+			}
+
+			return self.renderToken(tokens, idx, options);
+		},
+	});
+
+}
+
+function activateMarkdownItCheckbox() {
+	const markdownItCheckbox = require('markdown-it-checkbox');
+
+	markdownIt.use(markdownItCheckbox);
 }

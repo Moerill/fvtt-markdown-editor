@@ -86,6 +86,13 @@ List of extra markdown Syntax
 
   You may nest them by adding a `:` to each additional containing block.
 
+* ***OPTIONAL***: Use markdown-it-checkbox syntax, like:
+  ```
+     [ ] - unchecked
+	 [x] - checked
+  ```
+  Altering the checked state is not yet persisted outside of edit mode.
+  
 ## Keyboard shortcuts
 
 Shortcut (Windows / Linux) | Shortcut (macOS) | Action
