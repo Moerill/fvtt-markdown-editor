@@ -68,19 +68,15 @@ Leave me some nice comments (e.g. on Discord), recommend this module to others a
 
 List of extra markdown Syntax
 * FVTT style secret blocks using ``$$$`` at the start and end of a block, like:
-  
-
-```
+  ```
 	$$$
 	secret 
 	block
 	$$$
-	```
+  ```
 
-* *OPTIONAL*: Use markdown-it-container syntax to create blocks and assign arbitrary classes to them, like:
-  
-
-```
+* ***OPTIONAL***: Use markdown-it-container syntax to create blocks and assign arbitrary classes to them, like:
+  ```
     ::: my-block
 	# A header
 

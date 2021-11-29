@@ -1,30 +1,36 @@
 <form class="{{classes}}" autocomplete="off">
-	<nav class="sheet-tabs tabs">
-		<a class='item' data-tab='Info'>Info</a>
-		<a class='item' data-tab='Basic'>Settings</a>
-	</nav>	
+  <nav class="sheet-tabs tabs">
+    <a class='item' data-tab='Info'>Info</a>
+    <a class='item' data-tab='Basic'>Settings</a>
+  </nav>
 
-	<section class='tab' data-tab='Info'>
+  <section class='tab' data-tab='Info'>
     <h2>General</h2>
     <ul>
-      <li><a href="https://github.com/Moerill/fvtt-markdown-editor/issues">Bugs or feature suggestion? Create an issue here.</a></li>
+      <li><a href="https://github.com/Moerill/fvtt-markdown-editor/issues">Bugs or feature suggestion? Create an issue
+          here.</a></li>
       <li><a href="https://github.com/Moerill/fvtt-markdown-editor/blob/master/CHANGELOG.md">Changelog</a></li>
       <li><a href="https://github.com/Moerill/fvtt-markdown-editor">More Info</a></li>
     </ul>
 
     <p style="font-weight: bold; text-align: right;">Thanks, <br>Moerill</p>
     <h2 style="margin:0;"></h2>
-    <p style="text-align: right">Want to support development? <a href="https://github.com/Moerill/fvtt-markdown-editor#support-the-development">Click here</a></p>
-	</section>
-	<section class='tab' data-tab='Basic'>
+    <p style="text-align: right">Want to support development? <a
+        href="https://github.com/Moerill/fvtt-markdown-editor#support-the-development">Click here</a></p>
+  </section>
+  <section class='tab' data-tab='Basic'>
     <div class='form-checkbox-group'>
-      <input type='checkbox' data-dtype='boolean' name='chat' id='meme-chat' {{checked settings.chat}}/><label for='meme-chat'>Activate markdown support for chat.</label> 
+      <input type='checkbox' data-dtype='boolean' name='chat' id='meme-chat' {{checked settings.chat}} /><label
+        for='meme-chat'>Activate markdown support for chat.</label>
     </div>
     <div class='form-checkbox-group'>
-      <input type='checkbox' data-dtype='boolean' name='richText' id='meme-richText' {{checked settings.richText}}/><label for='meme-richText'>Activate markdown support for all rich text editors.</label> 
+      <input type='checkbox' data-dtype='boolean' name='richText' id='meme-richText' {{checked
+        settings.richText}} /><label for='meme-richText'>Activate markdown support for all rich text editors.</label>
     </div>
-     <div class='form-checkbox-group'>
-      <input type='checkbox' data-dtype='boolean' name='markdownItContainer' id='meme-markdownItContainer' {{checked settings.enableMarkdownItContainer}}/><label for='meme-markdownItContainer'>Activate full markdown-it-container support.</label> 
+    <div class='form-checkbox-group'>
+      <input type='checkbox' data-dtype='boolean' name='markdownItContainer' id='meme-markdownItContainer' {{checked
+        settings.markdownItContainer}} /><label for='meme-markdownItContainer'>Activate full markdown-it-container
+        support.</label>
     </div>
-	</section>
+  </section>
 </form>
