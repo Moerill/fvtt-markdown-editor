@@ -15,7 +15,8 @@ export class MemeSettings extends FormApplication {
         chat: true,
         richText: true,
         markdownItContainer: true,
-        markdownItCheckbox: false
+        markdownItCheckbox: false,
+        markdownItDeflist: false
       },
       config: false,
       onChange: () => {
@@ -84,6 +85,11 @@ export class MemeSettings extends FormApplication {
   static get isMarkdownItCheckboxActive() {
     const settings = game.settings.get('markdown-editor', 'world-settings');
     return settings.markdownItCheckbox;
+  }
+
+  static get isMarkdownItDeflistActive() {
+    const settings = game.settings.get('markdown-editor', 'world-settings');
+    return settings.markdownItDeflist;
   }
 
   constructor(object = {}, options) {
