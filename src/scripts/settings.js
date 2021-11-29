@@ -1,6 +1,6 @@
 export class MemeSettings extends FormApplication {
-	static init() {
-		game.settings.registerMenu('markdown-editor', 'menu', {
+  static init() {
+    game.settings.registerMenu('markdown-editor', 'menu', {
       name: '',
       label: 'GM Settings',
       icon: 'fas fa-mug-hot',
@@ -13,7 +13,8 @@ export class MemeSettings extends FormApplication {
       type: Object,
       default: {
         chat: true,
-        richText: true
+        richText: true,
+        markdownItContainer: true
       },
       config: false,
       onChange: () => {
@@ -43,26 +44,26 @@ export class MemeSettings extends FormApplication {
       restricted: false,
       config: true
     });
-	}
+  }
 
-	static get defaultOptions() {
-		return {
-			...super.defaultOptions,
-			template: "modules/markdown-editor/html/settings.html",
-			height: "auto",
-			title: "MEME - Settings & Info",
-			width: 600,
-			classes: ["meme", "settings"],
-			tabs: [ 
-				{
-					navSelector: '.tabs',
-					contentSelector: 'form',
-					initial: 'info'
-				} 
-			],
-			submitOnClose: true
-		}
-	}
+  static get defaultOptions() {
+    return {
+      ...super.defaultOptions,
+      template: "modules/markdown-editor/html/settings.html",
+      height: "auto",
+      title: "MEME - Settings & Info",
+      width: 600,
+      classes: ["meme", "settings"],
+      tabs: [
+        {
+          navSelector: '.tabs',
+          contentSelector: 'form',
+          initial: 'info'
+        }
+      ],
+      submitOnClose: true
+    }
+  }
 
   static get isRichTextActive() {
     const settings = game.settings.get('markdown-editor', 'world-settings');
@@ -71,35 +72,40 @@ export class MemeSettings extends FormApplication {
 
   static get isChatActive() {
     const settings = game.settings.get('markdown-editor', 'world-settings');
-    return settings.chat;    
+    return settings.chat;
   }
 
-	constructor(object = {}, options) {
-		super(object, options);
-	}
+  static get isMarkdownItContainerActive() {
+    const settings = game.settings.get('markdown-editor', 'world-settings');
+    return settings.markdownItContainer;
+  }
 
-	_getHeaderButtons() {
-		let btns = super._getHeaderButtons();
-		btns[0].label = "Save & Close";
-		return btns;
-	}
+  constructor(object = {}, options) {
+    super(object, options);
+  }
 
-	getSettingsData() {		
-		return game.settings.get('markdown-editor', 'world-settings');
-	}
+  _getHeaderButtons() {
+    let btns = super._getHeaderButtons();
+    btns[0].label = "Save & Close";
+    return btns;
+  }
 
-	getData() {
-		let data = super.getData();
-		data.settings = this.getSettingsData();
-		return data;
-	}
+  getSettingsData() {
+    return game.settings.get('markdown-editor', 'world-settings');
+  }
 
-	activateListeners(html) {
-		super.activateListeners(html);
-	}
+  getData() {
+    let data = super.getData();
+    data.settings = this.getSettingsData();
+    return data;
+  }
 
-	_updateObject(ev, formData) {
+  activateListeners(html) {
+    super.activateListeners(html);
+  }
+
+  _updateObject(ev, formData) {
     const data = expandObject(formData);
     game.settings.set('markdown-editor', 'world-settings', data);
-	}
+  }
 }

@@ -5828,6 +5828,8 @@
 
 /*! export markdownIt [provided] [no usage info] [missing usage info prevents renaming] */
 
+/*! export markdownItContainer [provided] [no usage info] [missing usage info prevents renaming] */
+
 /*! export marker [provided] [no usage info] [missing usage info prevents renaming] */
 
 /*! export marker [provided] [no usage info] [provision prevents renaming (no use info)] -> ./node_modules/entities/lib/maps/entities.json .marker */
