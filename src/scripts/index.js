@@ -1,4 +1,4 @@
-import { Meme, ChatMeme, markdownIt } from './mmde.js';
+import { Meme, ChatMeme, markdownIt, markdownItContainer } from './mmde.js';
 
 import { QuickInsertPlugin } from './plugins/quick-insert.js';
 
@@ -9,8 +9,6 @@ window.MEME = {
 	markdownIt,
 	BaseMeme: Meme,
 };
-
-// Hooks.on('ready', () => game.journal.get('Gb3Z2SCBSDp1sEVe').sheet.render(true))
 
 Hooks.on('init', function () {
 	MemeSettings.init();
@@ -29,6 +27,24 @@ Hooks.on('init', function () {
 			Hooks.callAll('MemeActivateChat', editorOptions);
 			app.editor = new MEME.ChatMeme(editorOptions);
 		});
+
+	if (MemeSettings.isMarkdownItContainerActive) {
+		activateMarkdownItContainer();
+	}
+
+	if (MemeSettings.isMarkdownItCheckboxActive) {
+		activateMarkdownItCheckbox();
+	}
+
+	if (MemeSettings.isMarkdownItDeflistActive) {
+		activateMarkdownItDeflist();
+	}
+	if (MemeSettings.isMarkdownItFootnoteActive) {
+		activateMarkdownItFootnote();
+	}
+	if (MemeSettings.isMarkdownItTypographerActive) {
+		activateMarkdownItTypographer();
+	}
 });
 
 function activateRichTextFeatures() {
@@ -42,8 +58,7 @@ function activateRichTextFeatures() {
 		if (!target) throw new Error('You must define the name of a target field.');
 
 		let editor = $(
-			`<div class="editor" ${owner ? 'data-owner="1"' : ''}><textarea class="editor-content" ${
-				editable ? 'data-editable="true"' : ''
+			`<div class="editor" ${owner ? 'data-owner="1"' : ''}><textarea class="editor-content" ${editable ? 'data-editable="true"' : ''
 			} name="${target}" data-dtype="String"></textarea></div>`
 		);
 
@@ -117,4 +132,44 @@ function activateRichTextFeatures() {
 		let event = new Event('memesave');
 		return this._onSubmit(event);
 	};
+}
+
+function activateMarkdownItContainer() {
+	markdownIt.use(markdownItContainer, "any", {
+		validate: function (params) {
+			return true;
+		},
+		render: function (tokens, idx, options, _env, self) {
+			const m = tokens[idx].info.trim().match(/^(.*)$/);
+
+			if (tokens[idx].nesting === 1) {
+				tokens[idx].attrPush(["class", m[1]]);
+			}
+
+			return self.renderToken(tokens, idx, options);
+		},
+	});
+
+}
+
+function activateMarkdownItCheckbox() {
+	const markdownItCheckbox = require('markdown-it-checkbox');
+
+	markdownIt.use(markdownItCheckbox);
+}
+
+function activateMarkdownItDeflist() {
+	const markdownItDeflist = require('markdown-it-deflist');
+
+	markdownIt.use(markdownItDeflist);
+}
+
+function activateMarkdownItFootnote() {
+	const markdownItFootnote = require('markdown-it-footnote');
+
+	markdownIt.use(markdownItFootnote);
+}
+
+function activateMarkdownItTypographer() {
+	markdownIt.options.typographer = true;
 }

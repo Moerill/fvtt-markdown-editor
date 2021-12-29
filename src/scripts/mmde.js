@@ -2,12 +2,14 @@ import EasyMDE from 'easymde';
 
 const md = require('markdown-it')({
 	html: true,
-	linkify: true,
+	linkify: true
 });
 export const markdownIt = md;
 require('codemirror/keymap/vim.js');
 
-md.use(require('markdown-it-container'), 'secret', {
+export const markdownItContainer = require('markdown-it-container');
+
+md.use(markdownItContainer, 'secret', {
 	validate: function (params) {
 		return true;
 	},

@@ -268,6 +268,8 @@
 
 /*! CommonJS bailout: module.exports is used directly at 100:0-14 */
 
+/*! CommonJS bailout: module.exports is used directly at 105:0-14 */
+
 /*! CommonJS bailout: module.exports is used directly at 119:0-14 */
 
 /*! CommonJS bailout: module.exports is used directly at 11:0-14 */
@@ -304,6 +306,8 @@
 
 /*! CommonJS bailout: module.exports is used directly at 2866:0-14 */
 
+/*! CommonJS bailout: module.exports is used directly at 2:65-79 */
+
 /*! CommonJS bailout: module.exports is used directly at 312:0-14 */
 
 /*! CommonJS bailout: module.exports is used directly at 338:0-14 */
@@ -328,6 +332,8 @@
 
 /*! CommonJS bailout: module.exports is used directly at 6:0-14 */
 
+/*! CommonJS bailout: module.exports is used directly at 77:0-14 */
+
 /*! CommonJS bailout: module.exports is used directly at 7:0-14 */
 
 /*! CommonJS bailout: module.exports is used directly at 89:0-14 */
@@ -345,6 +351,8 @@
 /*! CommonJS bailout: this is used directly at 14:2-6 */
 
 /*! CommonJS bailout: this is used directly at 16:2-6 */
+
+/*! CommonJS bailout: this is used directly at 9:2-6 */
 
 /*! codemirror */
 
@@ -5828,6 +5836,8 @@
 
 /*! export markdownIt [provided] [no usage info] [missing usage info prevents renaming] */
 
+/*! export markdownItContainer [provided] [no usage info] [missing usage info prevents renaming] */
+
 /*! export marker [provided] [no usage info] [missing usage info prevents renaming] */
 
 /*! export marker [provided] [no usage info] [provision prevents renaming (no use info)] -> ./node_modules/entities/lib/maps/entities.json .marker */
@@ -8980,7 +8990,13 @@
 
 /*! markdown-it */
 
+/*! markdown-it-checkbox */
+
 /*! markdown-it-container */
+
+/*! markdown-it-deflist */
+
+/*! markdown-it-footnote */
 
 /*! marked/lib/marked */
 
@@ -9016,6 +9032,8 @@
 
 /*! runtime requirements: module, top-level-this-exports */
 
+/*! runtime requirements: module, top-level-this-exports, __webpack_require__.g, __webpack_require__.* */
+
 /*! typo-js */
 
 /*! uc.micro */
@@ -9027,6 +9045,8 @@
 /*! uc.micro/categories/Z/regex */
 
 /*! uc.micro/properties/Any/regex */
+
+/*! underscore */
 
 /*! unknown exports (runtime-defined) */
 
@@ -9141,6 +9161,22 @@
 /*!***************************************************!*\
   !*** ./node_modules/codemirror/lib/codemirror.js ***!
   \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/markdown-it-deflist/index.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/underscore/underscore-umd.js ***!
+  \***************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/markdown-it-checkbox/index.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/markdown-it-footnote/index.js ***!
+  \****************************************************/
 
 /*!*****************************************************!*\
   !*** ./node_modules/markdown-it-container/index.js ***!
