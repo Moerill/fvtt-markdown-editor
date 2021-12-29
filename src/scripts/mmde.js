@@ -213,7 +213,7 @@ export class Meme extends EasyMDE {
 	 * @override
 	 */
 	markdown(text) {
-		return TextEditor.enrichHTML(md.render(text), { secrets: this.options.owner, entities: true });
+		return TextEditor.enrichHTML(md.render(text), { secrets: this.options.owner, documents: true });
 	}
 
 	createToolbar(items) {

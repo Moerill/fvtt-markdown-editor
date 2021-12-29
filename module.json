@@ -4,10 +4,14 @@
 	"description": "This module is currently in beta!<br>This module replaces the default text editor TinyMCE with a markdown editor.<br>For important information, full list of features and a list of keyboard shortcuts, visit <a href='https://github.com/Moerill/fvtt-markdown-editor'>the projects page.</a><br>Please also use the github repo linked above, to provide feedback or for bug reporting.",
 	"version": "0.5.0",
 	"minimumCoreVersion": "0.6.0",
-	"compatibleCoreVersion": "0.7.0",
+	"compatibleCoreVersion": "0.9.0",
 	"author": "Moerill",
-	"scripts": ["index.js"],
-	"styles": ["markdown-editor.css"],
+	"scripts": [
+		"index.js"
+	],
+	"styles": [
+		"markdown-editor.css"
+	],
 	"manifest": "https://raw.githubusercontent.com/Moerill/fvtt-markdown-editor/master/module.json",
 	"url": "https://github.com/Moerill/fvtt-markdown-editor",
 	"download": "https://github.com/Moerill/fvtt-markdown-editor/releases/download/v0.5.0/v0.5.0.zip"
